@@ -2,7 +2,6 @@ import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Logo } from "@/components/ds/Logo";
 import { Button } from "@/components/ds/Button";
-import { NAV } from "@/lib/nav";
 
 export function SiteFooter() {
   return (
@@ -102,19 +101,26 @@ export function SiteFooter() {
             Navigation
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "11px" }}>
-            {NAV.filter((item) => item.key !== "home").map((item) => (
-              <Link
-                key={item.key}
-                href={item.href}
-                style={{
-                  textDecoration: "none",
-                  fontSize: "15px",
-                  color: "rgba(255,255,255,0.8)",
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <Link
+              href="/services"
+              style={{
+                textDecoration: "none",
+                fontSize: "15px",
+                color: "rgba(255,255,255,0.8)",
+              }}
+            >
+              Services
+            </Link>
+            <Link
+              href="/about"
+              style={{
+                textDecoration: "none",
+                fontSize: "15px",
+                color: "rgba(255,255,255,0.8)",
+              }}
+            >
+              About us
+            </Link>
             <Link
               href="/contact"
               style={{
@@ -220,11 +226,9 @@ export function SiteFooter() {
           >
             Practical H&S advice, plainly explained. Let&apos;s have a chat.
           </p>
-          <Link href="/contact" style={{ textDecoration: "none" }}>
-            <Button variant="primary" size="sm">
-              Contact
-            </Button>
-          </Link>
+          <Button href="/contact" variant="primary" size="sm">
+            Contact
+          </Button>
         </div>
       </div>
 

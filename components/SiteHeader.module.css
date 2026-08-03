@@ -4,6 +4,10 @@
   align-items: center;
   gap: 30px;
 }
+/* Desktop Contact CTA: visible by default, hidden on narrow screens */
+.desktopCta {
+  display: inline-flex;
+}
 /* Burger: hidden by default, shown on narrow screens */
 .burger {
   display: none;
@@ -11,6 +15,9 @@
 
 @media (max-width: 900px) {
   .desktopNav {
+    display: none;
+  }
+  .desktopCta {
     display: none;
   }
   .burger {

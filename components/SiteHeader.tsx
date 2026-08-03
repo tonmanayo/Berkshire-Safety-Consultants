@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, type CSSProperties } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Building2, Store, Compass, HeartPulse, ChevronDown, Menu, X } from "lucide-react";
@@ -74,20 +74,14 @@ export function SiteHeader({ active }: SiteHeaderProps) {
     };
   }, [mobileOpen]);
 
-  // Close mobile menu on Escape
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape" && mobileOpen) {
-        setMobileOpen(false);
-      }
-    },
-    [mobileOpen],
-  );
-
+  // Close mobile menu on Escape — empty deps: unconditional setMobileOpen(false) is a no-op when already closed
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
+    const h = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", h);
+    return () => document.removeEventListener("keydown", h);
+  }, []);
 
   function linkColor(key: string): string {
     return current === key ? "var(--lime-500)" : "rgba(255,255,255,0.9)";
@@ -140,7 +134,9 @@ export function SiteHeader({ active }: SiteHeaderProps) {
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
               onFocus={() => setServicesOpen(true)}
-              onBlur={() => setServicesOpen(false)}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) setServicesOpen(false);
+              }}
             >
               <Link
                 href="/services"
@@ -211,18 +207,16 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             </Link>
           </nav>
 
-          {/* Contact button (desktop) */}
-          <Link href="/contact" style={{ textDecoration: "none" }}>
-            <Button variant="primary" size="sm">
-              Contact
-            </Button>
-          </Link>
+          {/* Contact button (desktop) — hidden at ≤900px via desktopCta class */}
+          <Button href="/contact" variant="primary" size="sm" className={styles.desktopCta}>
+            Contact
+          </Button>
 
           {/* Mobile burger button — hidden at desktop via CSS module; visible on small screens */}
           <button
-            aria-label="Open menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen(true)}
+            onClick={() => setMobileOpen((v) => !v)}
             style={{
               background: "transparent",
               border: "none",
@@ -340,15 +334,15 @@ export function SiteHeader({ active }: SiteHeaderProps) {
 
           {/* Contact button in mobile */}
           <div style={{ marginTop: "32px" }}>
-            <Link
+            <Button
               href="/contact"
-              style={{ textDecoration: "none" }}
+              variant="primary"
+              size="md"
+              fullWidth
               onClick={() => setMobileOpen(false)}
             >
-              <Button variant="primary" size="md" fullWidth>
-                Contact
-              </Button>
-            </Link>
+              Contact
+            </Button>
           </div>
         </div>
       )}

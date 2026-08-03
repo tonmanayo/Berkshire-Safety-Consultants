@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
+import Link from "next/link";
 
 type Variant = "primary" | "secondary" | "dark" | "ghost";
 type Size = "sm" | "md" | "lg";
@@ -45,9 +46,11 @@ export function Button({
   iconRight = null,
   disabled = false,
   type = "button",
+  href,
   onClick,
   children,
   style = {},
+  className,
 }: {
   variant?: Variant;
   size?: Size;
@@ -56,9 +59,11 @@ export function Button({
   iconRight?: ReactNode;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
+  href?: string;
   onClick?: () => void;
   children: ReactNode;
   style?: CSSProperties;
+  className?: string;
 }) {
   const base: CSSProperties = {
     display: fullWidth ? "flex" : "inline-flex",
@@ -69,6 +74,7 @@ export function Button({
     fontFamily: "var(--font-primary)",
     fontWeight: "var(--fw-bold)" as unknown as number,
     lineHeight: 1,
+    textDecoration: "none",
     textTransform: "uppercase",
     letterSpacing: "0.04em",
     borderRadius: "var(--radius-pill)",
@@ -79,13 +85,38 @@ export function Button({
     padding: SIZES[size].padding,
     fontSize: SIZES[size].fontSize,
     ...VARIANTS[variant],
+    ...(href && disabled ? { pointerEvents: "none" } : {}),
     ...style,
   };
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        aria-disabled={disabled || undefined}
+        className={className}
+        style={base}
+        onClick={onClick}
+        onMouseEnter={(e) => {
+          if (!disabled) e.currentTarget.style.background = HOVER_BG[variant];
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = String(VARIANTS[variant].background);
+        }}
+      >
+        {iconLeft}
+        {children}
+        {iconRight}
+      </Link>
+    );
+  }
+
   return (
     <button
       type={type}
       disabled={disabled}
       onClick={onClick}
+      className={className}
       style={base}
       onMouseEnter={(e) => {
         if (!disabled) e.currentTarget.style.background = HOVER_BG[variant];

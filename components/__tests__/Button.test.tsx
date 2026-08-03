@@ -38,3 +38,10 @@ test("size lg has padding 16px 32px", () => {
   const btn = screen.getByRole("button", { name: "Large" });
   expect(btn).toHaveStyle({ padding: "16px 32px" });
 });
+
+test("href prop renders a link with correct href and primary lime background", () => {
+  render(<Button href="/contact">Contact</Button>);
+  const link = screen.getByRole("link", { name: "Contact" });
+  expect(link).toHaveAttribute("href", "/contact");
+  expect(link).toHaveStyle({ background: "var(--lime-500)" });
+});

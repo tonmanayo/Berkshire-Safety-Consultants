@@ -8,6 +8,7 @@ import type { LucideIcon } from "lucide-react";
 import { Logo } from "@/components/ds/Logo";
 import { Button } from "@/components/ds/Button";
 import { NAV, SERVICES } from "@/lib/nav";
+import styles from "./SiteHeader.module.css";
 
 // Map lucide icon name strings → components
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -127,10 +128,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           </Link>
 
           {/* Desktop nav */}
-          <nav
-            aria-label="Main navigation"
-            style={{ display: "flex", alignItems: "center", gap: "30px" }}
-          >
+          <nav aria-label="Main navigation" className={styles.desktopNav}>
             {/* Home */}
             <Link href="/" style={{ ...NAV_LINK_BASE, color: linkColor("home") }}>
               Home
@@ -220,7 +218,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             </Button>
           </Link>
 
-          {/* Mobile burger button — hidden at desktop via CSS class; visible on small screens */}
+          {/* Mobile burger button — hidden at desktop via CSS module; visible on small screens */}
           <button
             aria-label="Open menu"
             aria-expanded={mobileOpen}
@@ -232,7 +230,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
               color: "var(--white)",
               padding: "4px",
             }}
-            className="bsc-mobile-burger"
+            className={styles.burger}
           >
             <Menu style={{ width: "24px", height: "24px" }} />
           </button>

@@ -1,0 +1,21 @@
+/* Desktop nav: visible by default, hidden on narrow screens */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+/* Burger: hidden by default, shown on narrow screens */
+.burger {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .desktopNav {
+    display: none;
+  }
+  .burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

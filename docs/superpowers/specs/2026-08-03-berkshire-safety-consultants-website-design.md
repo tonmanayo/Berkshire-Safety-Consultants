@@ -16,14 +16,14 @@ as designed — fidelity is the primary constraint.
 
 ## Stack (carried over from the Dr Marie Meechan project)
 
-| Concern   | Choice |
-|-----------|--------|
-| Framework | Next.js 16 + TypeScript, App Router, Turbopack, React Compiler |
-| Hosting   | Netlify (free tier), auto-deploy from GitHub, existing domain |
+| Concern   | Choice                                                                                                                                                                                       |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework | Next.js 16 + TypeScript, App Router, Turbopack, React Compiler                                                                                                                               |
+| Hosting   | Netlify (free tier), auto-deploy from GitHub, existing domain                                                                                                                                |
 | Styling   | The design's token CSS (`_ds/.../tokens/*.css`) kept verbatim as global CSS; inline styles transcribed to JSX `style` objects; CSS Modules for any new component-scoped styles. No Tailwind. |
-| Icons     | `lucide-react` (the design uses Lucide via `data-lucide`) |
-| Blog      | Sanity (free tier) — visual editor; dynamic `/blog/[slug]`; publish → on-demand revalidation *(Phase 2)* |
-| Email     | Netlify Forms — contact form emails the client, zero backend *(Phase 3)* |
+| Icons     | `lucide-react` (the design uses Lucide via `data-lucide`)                                                                                                                                    |
+| Blog      | Sanity (free tier) — visual editor; dynamic `/blog/[slug]`; publish → on-demand revalidation _(Phase 2)_                                                                                     |
+| Email     | Netlify Forms — contact form emails the client, zero backend _(Phase 3)_                                                                                                                     |
 
 Built test-first via subagent-driven development, with the same quality gates and CI as before.
 
@@ -43,6 +43,7 @@ React export**, not static HTML:
 - `image-slot.js` — the image-slot runtime (reference only).
 
 ### Theme
+
 The entire live site is the **light theme**: every content page uses `background:var(--paper)`
 with `color:var(--ink)` and pulls in the shared `SiteHeader`/`SiteFooter`. `Homepage Light.dc.html`
 is the canonical homepage. The stray dark `Homepage.dc.html` (inlined header, absolute production
@@ -64,7 +65,7 @@ services dropdown + mobile menu. Everything else is presentational.
   - `Tag` (~18×)
   - `Logo` (~4× — `tone` on-dark/on-light, `size`)
   - `SectionHeading` (~3×)
-  These are the backbone of fidelity; exact props/variants derived from `_ds_bundle.js`.
+    These are the backbone of fidelity; exact props/variants derived from `_ds_bundle.js`.
 - **`SiteHeader` / `SiteFooter`** → shared layout components. The services dropdown (hover-open)
   and mobile menu become a small **client component** (the only real interactivity).
 - **Page bodies** transcribed into `app/**/page.tsx`: inline `style="a:b"` → `style={{ a: "b" }}`
@@ -78,6 +79,7 @@ services dropdown + mobile menu. Everything else is presentational.
 - The contact form keeps its designed success-state UI; it does **not** email yet in Phase 1.
 
 ### Data flow (Phase 1)
+
 Fully static. No runtime data fetching. Pages render at build time and serve as static assets.
 
 ## Site structure — 24 routes
@@ -97,6 +99,7 @@ Principal Designer Services, First Aid & Fire Marshal Training).
 ## Tooling & quality gates (Phase 1)
 
 Identical to the Dr Marie Meechan project:
+
 - **TypeScript** strict; `tsc --noEmit` typecheck script.
 - **ESLint** (flat config) + **Prettier**; `lint` / `format` / `format:check` scripts.
 - **Husky + lint-staged** pre-commit hook; the design token CSS in `public/` excluded from
@@ -113,6 +116,7 @@ Identical to the Dr Marie Meechan project:
 ## Testing
 
 Test-first per the project's TDD practice. Phase 1 covers:
+
 - The 4 design-system components (variant/prop rendering).
 - Interactive bits: services dropdown open/close, mobile menu toggle.
 - A build smoke check (CI `next build`).
@@ -122,9 +126,9 @@ Test-first per the project's TDD practice. Phase 1 covers:
 ## Phasing
 
 1. **Phase 1 — Live site (this deliverable):** 4 DS components + shared header/footer, all 14 pages
-   + 10 blog posts ported faithfully, tooling + CI, deploy to Netlify on the domain. Contact form
-   shows the designed success state (no email yet). Milestone: the site is live, exactly as designed,
-   with a green CI pipeline.
+   - 10 blog posts ported faithfully, tooling + CI, deploy to Netlify on the domain. Contact form
+     shows the designed success state (no email yet). Milestone: the site is live, exactly as designed,
+     with a green CI pipeline.
 2. **Phase 2 — Blog:** Sanity schema for BSC posts (title, slug, category, hero image, excerpt,
    body as Portable Text, publishedAt, SEO), dynamic `/blog/[slug]` + Sanity-driven `/blog` index,
    migrate the 10 posts, publish → revalidate webhook. Embedded Studio at `/studio`.

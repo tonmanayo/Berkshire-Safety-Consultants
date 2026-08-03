@@ -24,32 +24,32 @@
 
 Design dir: `~/Downloads/Berkshire Safety Consultants Redesign (2)/` (referred to below as `$SRC`).
 
-| Source `.dc.html` | Route | `page.tsx` path |
-|---|---|---|
-| `Homepage Light` | `/` | `app/page.tsx` |
-| `About` | `/about` | `app/about/page.tsx` |
-| `Services` | `/services` | `app/services/page.tsx` |
-| `Housing Associations` | `/housing-associations` | `app/housing-associations/page.tsx` |
-| `Small Businesses` | `/small-businesses` | `app/small-businesses/page.tsx` |
-| `Principal Designer Services` | `/principal-designer-services` | `app/principal-designer-services/page.tsx` |
+| Source `.dc.html`                     | Route                              | `page.tsx` path                                |
+| ------------------------------------- | ---------------------------------- | ---------------------------------------------- |
+| `Homepage Light`                      | `/`                                | `app/page.tsx`                                 |
+| `About`                               | `/about`                           | `app/about/page.tsx`                           |
+| `Services`                            | `/services`                        | `app/services/page.tsx`                        |
+| `Housing Associations`                | `/housing-associations`            | `app/housing-associations/page.tsx`            |
+| `Small Businesses`                    | `/small-businesses`                | `app/small-businesses/page.tsx`                |
+| `Principal Designer Services`         | `/principal-designer-services`     | `app/principal-designer-services/page.tsx`     |
 | `First Aid and Fire Marshal Training` | `/first-aid-fire-marshal-training` | `app/first-aid-fire-marshal-training/page.tsx` |
-| `Assure` | `/assure` | `app/assure/page.tsx` |
-| `E-Learning` | `/e-learning` | `app/e-learning/page.tsx` |
-| `FAQ` | `/faq` | `app/faq/page.tsx` |
-| `Contact` | `/contact` | `app/contact/page.tsx` |
-| `Blog` | `/blog` | `app/blog/page.tsx` |
-| `Privacy Policy` | `/privacy-policy` | `app/privacy-policy/page.tsx` |
-| `Accessibility Statement` | `/accessibility-statement` | `app/accessibility-statement/page.tsx` |
-| `Blog - Cultivating Compassion` | `/blog/cultivating-compassion` | `app/blog/cultivating-compassion/page.tsx` |
-| `Blog - Fire Safety 101` | `/blog/fire-safety-101` | `app/blog/fire-safety-101/page.tsx` |
-| `Blog - ISO 9001 vs ISO 45001` | `/blog/iso-9001-vs-iso-45001` | `app/blog/iso-9001-vs-iso-45001/page.tsx` |
-| `Blog - New Fire Safety Laws` | `/blog/new-fire-safety-laws` | `app/blog/new-fire-safety-laws/page.tsx` |
-| `Blog - Prioritising Mental Health` | `/blog/prioritising-mental-health` | `app/blog/prioritising-mental-health/page.tsx` |
-| `Blog - Toolbox Talks` | `/blog/toolbox-talks` | `app/blog/toolbox-talks/page.tsx` |
-| `Blog - Updated HSE Guidance` | `/blog/updated-hse-guidance` | `app/blog/updated-hse-guidance/page.tsx` |
-| `Blog - Why Dusty Sites` | `/blog/why-dusty-sites` | `app/blog/why-dusty-sites/page.tsx` |
-| `Blog - Winter Site Safety` | `/blog/winter-site-safety` | `app/blog/winter-site-safety/page.tsx` |
-| `Blog - World Day for Safety` | `/blog/world-day-for-safety` | `app/blog/world-day-for-safety/page.tsx` |
+| `Assure`                              | `/assure`                          | `app/assure/page.tsx`                          |
+| `E-Learning`                          | `/e-learning`                      | `app/e-learning/page.tsx`                      |
+| `FAQ`                                 | `/faq`                             | `app/faq/page.tsx`                             |
+| `Contact`                             | `/contact`                         | `app/contact/page.tsx`                         |
+| `Blog`                                | `/blog`                            | `app/blog/page.tsx`                            |
+| `Privacy Policy`                      | `/privacy-policy`                  | `app/privacy-policy/page.tsx`                  |
+| `Accessibility Statement`             | `/accessibility-statement`         | `app/accessibility-statement/page.tsx`         |
+| `Blog - Cultivating Compassion`       | `/blog/cultivating-compassion`     | `app/blog/cultivating-compassion/page.tsx`     |
+| `Blog - Fire Safety 101`              | `/blog/fire-safety-101`            | `app/blog/fire-safety-101/page.tsx`            |
+| `Blog - ISO 9001 vs ISO 45001`        | `/blog/iso-9001-vs-iso-45001`      | `app/blog/iso-9001-vs-iso-45001/page.tsx`      |
+| `Blog - New Fire Safety Laws`         | `/blog/new-fire-safety-laws`       | `app/blog/new-fire-safety-laws/page.tsx`       |
+| `Blog - Prioritising Mental Health`   | `/blog/prioritising-mental-health` | `app/blog/prioritising-mental-health/page.tsx` |
+| `Blog - Toolbox Talks`                | `/blog/toolbox-talks`              | `app/blog/toolbox-talks/page.tsx`              |
+| `Blog - Updated HSE Guidance`         | `/blog/updated-hse-guidance`       | `app/blog/updated-hse-guidance/page.tsx`       |
+| `Blog - Why Dusty Sites`              | `/blog/why-dusty-sites`            | `app/blog/why-dusty-sites/page.tsx`            |
+| `Blog - Winter Site Safety`           | `/blog/winter-site-safety`         | `app/blog/winter-site-safety/page.tsx`         |
+| `Blog - World Day for Safety`         | `/blog/world-day-for-safety`       | `app/blog/world-day-for-safety/page.tsx`       |
 
 Ignore: `Homepage.dc.html` (dark stray), `SiteHeader.dc.html` / `SiteFooter.dc.html` (become components), `.image-slots.state.json`, `support.js`, `image-slot.js`, `_ds/.../_ds_bundle.js` (reference only), `uploads/`.
 
@@ -86,13 +86,16 @@ vitest.config.ts  vitest.setup.tsx  netlify.toml  package.json
 - [ ] **Step 1: Scaffold into the current directory**
 
 Run:
+
 ```bash
 cd /Users/tonymack/dev/Berkshire-Safety-Consultants
 npx --yes create-next-app@latest . --typescript --eslint --app --no-src-dir --no-tailwind --turbopack --import-alias "@/*" --use-npm --yes
 ```
+
 If it refuses because the directory is non-empty, it should still proceed (`.git/`+`docs/` don't conflict). If it hard-fails, report BLOCKED with the exact error (do NOT delete `docs/`).
 
 - [ ] **Step 2: Enable the React Compiler** — edit `next.config.ts`:
+
 ```ts
 import type { NextConfig } from "next";
 
@@ -102,11 +105,13 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 ```
+
 If the build asks for it: `npm install -D babel-plugin-react-compiler`.
 
 - [ ] **Step 3: Confirm `tsconfig.json` has `"strict": true`** (create-next-app sets it; add if missing).
 
 - [ ] **Step 4: Add Prettier** — `npm install -D prettier`; create `.prettierrc`:
+
 ```json
 {
   "semi": true,
@@ -115,7 +120,9 @@ If the build asks for it: `npm install -D babel-plugin-react-compiler`.
   "printWidth": 100
 }
 ```
+
 Create `.prettierignore`:
+
 ```
 .next
 node_modules
@@ -123,9 +130,11 @@ public/ds
 public/assets
 package-lock.json
 ```
+
 (`public/ds` + `public/assets` ignored so verbatim design files are never reformatted.)
 
 - [ ] **Step 5: Set `package.json` scripts exactly to**:
+
 ```json
 "scripts": {
   "dev": "next dev --turbopack",
@@ -138,11 +147,13 @@ package-lock.json
   "test": "vitest run"
 }
 ```
+
 (`test` references vitest, installed in Task 3 — do not run `npm test` yet.)
 
 - [ ] **Step 6: Verify** — `npm run build` succeeds; `npm run typecheck && npm run lint && npm run format:check` pass (run `npm run format` once if format:check flags files).
 
 - [ ] **Step 7: Commit**
+
 ```bash
 git add -A
 git commit -m "chore: scaffold Next.js 16 app with TypeScript, React Compiler, Prettier"
@@ -155,11 +166,13 @@ git commit -m "chore: scaffold Next.js 16 app with TypeScript, React Compiler, P
 **Files:** create `vitest.config.ts`, `vitest.setup.tsx`, `components/__tests__/smoke.test.tsx`.
 
 **Interfaces:**
+
 - Produces: a working `npm test` (Vitest, jsdom, `@` alias) that later component tasks rely on.
 
 - [ ] **Step 1: Install** — `npm install -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event`
 
 - [ ] **Step 2: `vitest.config.ts`**:
+
 ```ts
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
@@ -179,6 +192,7 @@ export default defineConfig({
 ```
 
 - [ ] **Step 3: `vitest.setup.tsx`**:
+
 ```tsx
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "@testing-library/jest-dom/vitest";
@@ -201,6 +215,7 @@ vi.mock("next/link", () => ({
 ```
 
 - [ ] **Step 4: `components/__tests__/smoke.test.tsx`**:
+
 ```tsx
 import { render, screen } from "@testing-library/react";
 
@@ -213,11 +228,13 @@ test("test harness renders components", () => {
   expect(screen.getByText("hello")).toBeInTheDocument();
 });
 ```
+
 If tsc typechecks `vitest.config.ts` and errors on a vite/rolldown type conflict, add `"vitest.config.ts"` to `tsconfig.json` `exclude` and add `"types": ["vitest/globals"]` to `compilerOptions`.
 
 - [ ] **Step 5: Run** `npm test` → 1 passing. Then `npm run typecheck && npm run lint && npm run format:check` pass.
 
 - [ ] **Step 6: Commit**
+
 ```bash
 git add -A
 git commit -m "test: set up Vitest + React Testing Library"
@@ -232,6 +249,7 @@ git commit -m "test: set up Vitest + React Testing Library"
 - [ ] **Step 1: Install + init** — `npm install -D husky lint-staged` then `npx husky init`
 
 - [ ] **Step 2: Add to `package.json`**:
+
 ```json
 "lint-staged": {
   "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
@@ -240,9 +258,11 @@ git commit -m "test: set up Vitest + React Testing Library"
 ```
 
 - [ ] **Step 3: Replace `.husky/pre-commit` contents with exactly**:
+
 ```sh
 npx lint-staged
 ```
+
 (Remove any default `npm test` line.)
 
 - [ ] **Step 4: Verify + commit** — `git add -A && git commit -m "chore: add Husky + lint-staged pre-commit hook"` runs lint-staged and succeeds.
@@ -254,6 +274,7 @@ npx lint-staged
 **Files:** create `.github/workflows/ci.yml`.
 
 - [ ] **Step 1: Create the workflow**:
+
 ```yaml
 name: CI
 
@@ -282,6 +303,7 @@ jobs:
 - [ ] **Step 2: Verify locally** — `npm ci && npm run typecheck && npm run lint && npm run format:check && npm test && npm run build` all exit 0.
 
 - [ ] **Step 3: Commit**
+
 ```bash
 git add -A
 git commit -m "ci: add GitHub Actions pipeline (typecheck, lint, format, test, build)"
@@ -294,6 +316,7 @@ git commit -m "ci: add GitHub Actions pipeline (typecheck, lint, format, test, b
 **Files:** create `public/ds/tokens/*.css`, `public/ds/styles.css`, `public/assets/*`.
 
 - [ ] **Step 1: Copy tokens + styles verbatim**:
+
 ```bash
 SRC="/Users/tonymack/Downloads/Berkshire Safety Consultants Redesign (2)"
 DS="$SRC/_ds/berkshire-safety-consultants-design-syst-f819c261-eaec-4d63-a0b6-dae4fbb1cf0b"
@@ -303,26 +326,32 @@ cp "$DS/styles.css" public/ds/styles.css
 ```
 
 - [ ] **Step 2: Copy image assets verbatim**:
+
 ```bash
 cp -R "$SRC/assets" public/assets
 ```
 
 - [ ] **Step 3: Verify key files exist**:
+
 ```bash
 ls public/ds/tokens/colors.css public/ds/tokens/fonts.css public/ds/tokens/typography.css \
    public/ds/tokens/spacing.css public/ds/tokens/motifs.css public/ds/styles.css \
    public/assets/hero-worker-branded.png public/assets/bsc-wordmark-lime.png
 ```
+
 All list (no "No such file").
 
 - [ ] **Step 4: Confirm tokens are byte-identical** (fidelity):
+
 ```bash
 diff "$DS/tokens/colors.css" public/ds/tokens/colors.css && echo "colors.css identical"
 diff "$DS/styles.css" public/ds/styles.css && echo "styles.css identical"
 ```
+
 Both show no differences.
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add -A
 git commit -m "chore: add design tokens and image assets to public/"
@@ -335,12 +364,14 @@ git commit -m "chore: add design tokens and image assets to public/"
 **Files:** modify `app/layout.tsx`; delete `app/globals.css`, `app/page.module.css` if present.
 
 **Interfaces:**
+
 - Consumes: `@/components/SiteHeader`, `@/components/SiteFooter` (Tasks 12–13). Until those exist, the app won't build — do the build verification at the end of Task 13.
 - Produces: the global HTML shell + token CSS every page renders inside.
 
 - [ ] **Step 1: Remove scaffold styles** — `rm -f app/globals.css app/page.module.css` and ensure `app/layout.tsx` does not `import "./globals.css"` or use `next/font`.
 
 - [ ] **Step 2: Replace `app/layout.tsx`**:
+
 ```tsx
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -365,7 +396,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href={`${DS}/tokens/motifs.css`} />
         <link rel="stylesheet" href={`${DS}/styles.css`} />
       </head>
-      <body style={{ margin: 0, background: "var(--paper)", color: "var(--ink)", fontFamily: "var(--font-primary)" }}>
+      <body
+        style={{
+          margin: 0,
+          background: "var(--paper)",
+          color: "var(--ink)",
+          fontFamily: "var(--font-primary)",
+        }}
+      >
         <SiteHeader />
         {children}
         <SiteFooter />
@@ -376,6 +414,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 - [ ] **Step 3: Commit** (build verified in Task 13):
+
 ```bash
 git add -A
 git commit -m "feat: add root layout with design token stylesheets"
@@ -388,9 +427,11 @@ git commit -m "feat: add root layout with design token stylesheets"
 **Files:** create `components/ds/Button.tsx`, `components/__tests__/Button.test.tsx`.
 
 **Interfaces:**
+
 - Produces: `Button({ variant?, size?, fullWidth?, iconLeft?, iconRight?, disabled?, type?, onClick?, children, style? })` — `variant` ∈ `"primary"|"secondary"|"dark"|"ghost"` (default `"primary"`), `size` ∈ `"sm"|"md"|"lg"` (default `"md"`). Used by nearly every page + header.
 
 - [ ] **Step 1: Failing test** `components/__tests__/Button.test.tsx`:
+
 ```tsx
 import { render, screen } from "@testing-library/react";
 import { Button } from "@/components/ds/Button";
@@ -412,6 +453,7 @@ test("secondary variant is transparent with a lime border", () => {
 - [ ] **Step 2: Run** `npm test -- Button` → FAIL (module not found).
 
 - [ ] **Step 3: Implement `components/ds/Button.tsx`** (transcribed from the DS bundle, exact styles):
+
 ```tsx
 "use client";
 
@@ -427,9 +469,21 @@ const SIZES: Record<Size, CSSProperties> = {
 };
 
 const VARIANTS: Record<Variant, CSSProperties> = {
-  primary: { background: "var(--lime-500)", color: "var(--navy-900)", border: "2px solid var(--lime-500)" },
-  secondary: { background: "transparent", color: "var(--lime-600)", border: "2px solid var(--lime-500)" },
-  dark: { background: "var(--navy-900)", color: "var(--white)", border: "2px solid var(--navy-900)" },
+  primary: {
+    background: "var(--lime-500)",
+    color: "var(--navy-900)",
+    border: "2px solid var(--lime-500)",
+  },
+  secondary: {
+    background: "transparent",
+    color: "var(--lime-600)",
+    border: "2px solid var(--lime-500)",
+  },
+  dark: {
+    background: "var(--navy-900)",
+    color: "var(--white)",
+    border: "2px solid var(--navy-900)",
+  },
   ghost: { background: "transparent", color: "var(--navy-900)", border: "2px solid transparent" },
 };
 
@@ -508,6 +562,7 @@ export function Button({
 - [ ] **Step 4: Run** `npm test -- Button` → PASS.
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add components/ds/Button.tsx components/__tests__/Button.test.tsx
 git commit -m "feat: add Button design-system component"
@@ -520,9 +575,11 @@ git commit -m "feat: add Button design-system component"
 **Files:** create `components/ds/Tag.tsx`, `components/__tests__/Tag.test.tsx`.
 
 **Interfaces:**
+
 - Produces: `Tag({ variant?, size?, children, style? })` — `variant` ∈ `"lime"|"outline"|"navy"|"soft"` (default `"lime"`), `size` ∈ `"sm"|"md"` (default `"md"`).
 
 - [ ] **Step 1: Failing test** `components/__tests__/Tag.test.tsx`:
+
 ```tsx
 import { render, screen } from "@testing-library/react";
 import { Tag } from "@/components/ds/Tag";
@@ -538,6 +595,7 @@ test("renders a lime tag by default", () => {
 - [ ] **Step 2: Run** `npm test -- Tag` → FAIL.
 
 - [ ] **Step 3: Implement `components/ds/Tag.tsx`**:
+
 ```tsx
 import type { CSSProperties, ReactNode } from "react";
 
@@ -550,9 +608,21 @@ const SIZES: Record<Size, CSSProperties> = {
 };
 
 const VARIANTS: Record<Variant, CSSProperties> = {
-  lime: { background: "var(--lime-500)", color: "var(--navy-900)", border: "1.5px solid var(--lime-500)" },
-  outline: { background: "transparent", color: "var(--lime-600)", border: "1.5px solid var(--lime-500)" },
-  navy: { background: "var(--navy-800)", color: "var(--white)", border: "1.5px solid var(--navy-800)" },
+  lime: {
+    background: "var(--lime-500)",
+    color: "var(--navy-900)",
+    border: "1.5px solid var(--lime-500)",
+  },
+  outline: {
+    background: "transparent",
+    color: "var(--lime-600)",
+    border: "1.5px solid var(--lime-500)",
+  },
+  navy: {
+    background: "var(--navy-800)",
+    color: "var(--white)",
+    border: "1.5px solid var(--navy-800)",
+  },
   soft: { background: "var(--mist)", color: "var(--navy-900)", border: "1.5px solid var(--mist)" },
 };
 
@@ -593,6 +663,7 @@ export function Tag({
 - [ ] **Step 4: Run** `npm test -- Tag` → PASS.
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add components/ds/Tag.tsx components/__tests__/Tag.test.tsx
 git commit -m "feat: add Tag design-system component"
@@ -605,9 +676,11 @@ git commit -m "feat: add Tag design-system component"
 **Files:** create `components/ds/Logo.tsx`, `components/__tests__/Logo.test.tsx`.
 
 **Interfaces:**
+
 - Produces: `Logo({ tone?, size?, rule?, style? })` — `tone` ∈ `"onDark"|"onLight"|"lime"|"mono"` (default `"onDark"`), `size` ∈ `"sm"|"md"|"lg"` (default `"md"`), `rule` default `true`. Three stacked words "Berkshire / Safety / Consultants" + accent rule.
 
 - [ ] **Step 1: Failing test** `components/__tests__/Logo.test.tsx`:
+
 ```tsx
 import { render, screen } from "@testing-library/react";
 import { Logo } from "@/components/ds/Logo";
@@ -623,6 +696,7 @@ test("renders the three-word wordmark", () => {
 - [ ] **Step 2: Run** `npm test -- Logo` → FAIL.
 
 - [ ] **Step 3: Implement `components/ds/Logo.tsx`**:
+
 ```tsx
 import type { CSSProperties } from "react";
 
@@ -691,6 +765,7 @@ export function Logo({
 - [ ] **Step 4: Run** `npm test -- Logo` → PASS.
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add components/ds/Logo.tsx components/__tests__/Logo.test.tsx
 git commit -m "feat: add Logo design-system component"
@@ -703,9 +778,11 @@ git commit -m "feat: add Logo design-system component"
 **Files:** create `components/ds/SectionHeading.tsx`, `components/__tests__/SectionHeading.test.tsx`.
 
 **Interfaces:**
+
 - Produces: `SectionHeading({ eyebrow?, title, accent?, tone?, italic?, align?, style? })` — `tone` ∈ `"onDark"|"onLight"` (default `"onDark"`), `italic` default `true`, `align` default `"left"`. Renders eyebrow + lime rule + `<h2>` title with optional lime `accent` word.
 
 - [ ] **Step 1: Failing test** `components/__tests__/SectionHeading.test.tsx`:
+
 ```tsx
 import { render, screen } from "@testing-library/react";
 import { SectionHeading } from "@/components/ds/SectionHeading";
@@ -722,6 +799,7 @@ test("renders eyebrow and an h2 title with accent", () => {
 - [ ] **Step 2: Run** `npm test -- SectionHeading` → FAIL.
 
 - [ ] **Step 3: Implement `components/ds/SectionHeading.tsx`**:
+
 ```tsx
 import type { CSSProperties } from "react";
 
@@ -773,7 +851,12 @@ export function SectionHeading({
       )}
       <span
         aria-hidden="true"
-        style={{ width: "3.5rem", height: 4, borderRadius: "var(--radius-pill)", background: "var(--lime-500)" }}
+        style={{
+          width: "3.5rem",
+          height: 4,
+          borderRadius: "var(--radius-pill)",
+          background: "var(--lime-500)",
+        }}
       />
       <h2
         style={{
@@ -803,6 +886,7 @@ export function SectionHeading({
 - [ ] **Step 4: Run** `npm test -- SectionHeading` → PASS.
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add components/ds/SectionHeading.tsx components/__tests__/SectionHeading.test.tsx
 git commit -m "feat: add SectionHeading design-system component"
@@ -815,11 +899,13 @@ git commit -m "feat: add SectionHeading design-system component"
 **Files:** create `lib/nav.ts`; install `lucide-react`.
 
 **Interfaces:**
+
 - Produces: `NAV` (primary links) and `SERVICES` (dropdown submenu) consumed by `SiteHeader`/`SiteFooter`.
 
 - [ ] **Step 1: Install icons** — `npm install lucide-react`
 
 - [ ] **Step 2: Create `lib/nav.ts`**:
+
 ```ts
 export type NavItem = { href: string; label: string; key: string };
 export type ServiceItem = NavItem & { icon: string };
@@ -833,14 +919,30 @@ export const NAV: NavItem[] = [
 
 // Services dropdown (icons are lucide names)
 export const SERVICES: ServiceItem[] = [
-  { href: "/housing-associations", label: "Housing Associations", key: "housing", icon: "building-2" },
+  {
+    href: "/housing-associations",
+    label: "Housing Associations",
+    key: "housing",
+    icon: "building-2",
+  },
   { href: "/small-businesses", label: "Small Businesses", key: "small-business", icon: "store" },
-  { href: "/principal-designer-services", label: "Principal Designer Services", key: "pds", icon: "compass" },
-  { href: "/first-aid-fire-marshal-training", label: "First Aid & Fire Marshal Training", key: "training", icon: "heart-pulse" },
+  {
+    href: "/principal-designer-services",
+    label: "Principal Designer Services",
+    key: "pds",
+    icon: "compass",
+  },
+  {
+    href: "/first-aid-fire-marshal-training",
+    label: "First Aid & Fire Marshal Training",
+    key: "training",
+    icon: "heart-pulse",
+  },
 ];
 ```
 
 - [ ] **Step 3: Verify** `npm run typecheck` clean. Commit:
+
 ```bash
 git add lib/nav.ts package.json package-lock.json
 git commit -m "feat: add shared NAV data and lucide-react"
@@ -853,12 +955,14 @@ git commit -m "feat: add shared NAV data and lucide-react"
 **Files:** create `components/SiteHeader.tsx`, `components/__tests__/SiteHeader.test.tsx`.
 
 **Interfaces:**
+
 - Consumes: `NAV`, `SERVICES` from `@/lib/nav`; `Button`, `Logo` from `@/components/ds/*`; icons from `lucide-react`.
 - Produces: `SiteHeader({ active? })` — sticky header; `active` matches a `NAV`/`SERVICES` key to highlight the current link. Services dropdown opens on hover/focus; a burger toggles a mobile menu.
 
 Reference the design's `SiteHeader.dc.html` for exact structure/styles (sticky, hazard-stripe top bar, backdrop blur, lime hover, services submenu with lucide icons + Contact button). Transcribe styles verbatim; wire the two interactive bits with React state.
 
 - [ ] **Step 1: Failing test** `components/__tests__/SiteHeader.test.tsx`:
+
 ```tsx
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -897,6 +1001,7 @@ test("mobile menu opens and closes", async () => {
 - [ ] **Step 4: Run** `npm test -- SiteHeader` → PASS (both tests).
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add components/SiteHeader.tsx components/__tests__/SiteHeader.test.tsx
 git commit -m "feat: add SiteHeader with services dropdown and mobile menu"
@@ -909,10 +1014,12 @@ git commit -m "feat: add SiteHeader with services dropdown and mobile menu"
 **Files:** create `components/SiteFooter.tsx`, `components/__tests__/SiteFooter.test.tsx`.
 
 **Interfaces:**
+
 - Consumes: `NAV`/`SERVICES` from `@/lib/nav`; `Logo` from `@/components/ds/Logo`.
 - Produces: `SiteFooter()` — server component; static footer transcribed from `SiteFooter.dc.html`.
 
 - [ ] **Step 1: Failing test** `components/__tests__/SiteFooter.test.tsx`:
+
 ```tsx
 import { render, screen } from "@testing-library/react";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -930,12 +1037,15 @@ test("renders footer with key links", () => {
 - [ ] **Step 4: Run** `npm test -- SiteFooter` → PASS.
 
 - [ ] **Step 5: First full build** — now that layout + header + footer exist:
+
 ```bash
 npm run build
 ```
+
 Fix any import errors. The build will succeed with only the home route as the starter until Task 14; that's fine — confirm no module/type errors from layout/header/footer.
 
 - [ ] **Step 6: Commit**
+
 ```bash
 git add components/SiteFooter.tsx components/__tests__/SiteFooter.test.tsx
 git commit -m "feat: add SiteFooter component"
@@ -963,9 +1073,11 @@ Each page task transcribes the **body** of a `.dc.html` file (everything inside 
 **Files:** create `app/page.tsx` (replace the scaffold). Source: `$SRC/Homepage Light.dc.html`.
 
 **Interfaces:**
+
 - Consumes: `Button`, `Tag`, `SectionHeading` from `@/components/ds/*`; `lucide-react` icons.
 
 - [ ] **Step 1: Implement `app/page.tsx`** following the porting procedure. Transcribe the full `Homepage Light` body: hero (eyebrow with `ShieldCheck`, the "Building trust" `<h1>` with lime accent word, lead paragraph, two `<Button>`s (primary "Explore services" + secondary "Talk to us"), the ISO/SSIP trust pills), then each subsequent section (services overview cards, who-we-help, accreditations, testimonial, CTA, etc.) exactly as designed. Use `<SectionHeading>` where the design uses the eyebrow+rule+title rhythm. Add:
+
 ```tsx
 export const metadata = {
   title: "Berkshire Safety Consultants — Health & Safety Consultancy",
@@ -977,6 +1089,7 @@ export const metadata = {
 - [ ] **Step 2: Build + visual verify** — `npm run build` then `npm run dev`, open `/`, compare to the design. Confirm header/footer wrap it, hero image loads (`/assets/hero-worker-branded.png`), fonts (Open Sans/Poppins) and lime/navy tokens render.
 
 - [ ] **Step 3: Commit**
+
 ```bash
 git add app/page.tsx
 git commit -m "feat: port home page"
@@ -1005,6 +1118,7 @@ For each task, `npm run build` must pass and the routes render before committing
 - [ ] **Step 2: Build + verify** — `/blog` renders 10 cards linking to the right slugs.
 
 - [ ] **Step 3: Commit**
+
 ```bash
 git add app/blog/page.tsx
 git commit -m "feat: port blog index"
@@ -1023,6 +1137,7 @@ git commit -m "feat: port blog index"
 - [ ] **Step 2: Build + verify** — `npm run build`; open each `/blog/<slug>`; the "Back to blog" link resolves to `/blog`; content matches the source.
 
 - [ ] **Step 3: Commit** (may split into 2 commits of 5 posts if a reviewer prefers):
+
 ```bash
 git add app/blog
 git commit -m "feat: port 10 blog posts as static pages"
@@ -1035,6 +1150,7 @@ git commit -m "feat: port 10 blog posts as static pages"
 **Files:** create `app/not-found.tsx`.
 
 - [ ] **Step 1: Implement** a light-theme 404 using the design tokens and DS components (it renders inside the root layout, so header/footer wrap it):
+
 ```tsx
 import Link from "next/link";
 import { Button } from "@/components/ds/Button";
@@ -1044,18 +1160,56 @@ export const metadata = { title: "Page not found — Berkshire Safety Consultant
 export default function NotFound() {
   return (
     <section style={{ background: "var(--paper)", color: "var(--ink)" }}>
-      <div style={{ maxWidth: "760px", margin: "0 auto", padding: "120px 24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "24px" }}>
-        <span style={{ fontSize: "var(--text-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "var(--tracking-wider)", color: "var(--accent-on-light)" }}>
+      <div
+        style={{
+          maxWidth: "760px",
+          margin: "0 auto",
+          padding: "120px 24px",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "24px",
+        }}
+      >
+        <span
+          style={{
+            fontSize: "var(--text-xs)",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "var(--tracking-wider)",
+            color: "var(--accent-on-light)",
+          }}
+        >
           Page not found
         </span>
-        <h1 style={{ margin: 0, fontWeight: 800, fontStyle: "italic", textTransform: "uppercase", fontSize: "clamp(32px, 5vw, 56px)", lineHeight: 1.05, color: "var(--navy-900)" }}>
+        <h1
+          style={{
+            margin: 0,
+            fontWeight: 800,
+            fontStyle: "italic",
+            textTransform: "uppercase",
+            fontSize: "clamp(32px, 5vw, 56px)",
+            lineHeight: 1.05,
+            color: "var(--navy-900)",
+          }}
+        >
           This page isn&rsquo;t here
         </h1>
-        <p style={{ margin: 0, fontSize: "var(--text-lg)", color: "var(--gray-700)", maxWidth: "34rem" }}>
+        <p
+          style={{
+            margin: 0,
+            fontSize: "var(--text-lg)",
+            color: "var(--gray-700)",
+            maxWidth: "34rem",
+          }}
+        >
           The page you were looking for may have moved. Let&rsquo;s get you back on solid ground.
         </p>
         <Link href="/" style={{ textDecoration: "none" }}>
-          <Button variant="primary" size="lg">Back to home</Button>
+          <Button variant="primary" size="lg">
+            Back to home
+          </Button>
         </Link>
       </div>
     </section>
@@ -1066,6 +1220,7 @@ export default function NotFound() {
 - [ ] **Step 2: Build + verify** — visit a nonexistent route; the styled 404 renders within header/footer.
 
 - [ ] **Step 3: Commit**
+
 ```bash
 git add app/not-found.tsx
 git commit -m "feat: add styled 404 page"
@@ -1078,6 +1233,7 @@ git commit -m "feat: add styled 404 page"
 **Files:** create `netlify.toml`.
 
 - [ ] **Step 1: Create `netlify.toml`**:
+
 ```toml
 [build]
   command = "npm run build"
@@ -1088,6 +1244,7 @@ git commit -m "feat: add styled 404 page"
 ```
 
 - [ ] **Step 2: Commit**
+
 ```bash
 git add netlify.toml
 git commit -m "chore: add Netlify configuration"
@@ -1100,9 +1257,11 @@ git commit -m "chore: add Netlify configuration"
 ## Task 22: Final verification
 
 - [ ] **Step 1: Full local gate**
+
 ```bash
 npm run typecheck && npm run lint && npm run format:check && npm test && npm run build
 ```
+
 All pass (lint shows only the expected `no-img-element` / `no-css-tags` warnings, 0 errors).
 
 - [ ] **Step 2: Route check** — the build output lists all 24 routes (`/`, the 13 pages, `/blog`, the 10 `/blog/<slug>`, `/_not-found`).
@@ -1110,6 +1269,7 @@ All pass (lint shows only the expected `no-img-element` / `no-css-tags` warnings
 - [ ] **Step 3: Fidelity pass** — with `npm run dev`, walk every route and compare against the design: header (incl. services dropdown + mobile menu), footer, the 4 DS components, hero images, icons, fonts, tokens, the contact form success state, and that no internal link 404s.
 
 - [ ] **Step 4: Optional tag**
+
 ```bash
 git tag phase-1-complete
 ```
@@ -1117,6 +1277,7 @@ git tag phase-1-complete
 ---
 
 ## Known non-functional items (flag to client; out of Phase 1 scope)
+
 - **Contact form** shows the designed success state but does **not** email yet (Phase 3, Netlify Forms).
 - **Blog posts** are static in Phase 1; they become Sanity-authored in Phase 2 (dynamic `/blog/[slug]`).
 - **E-Learning / Assure** are informational pages only (no payments/enrolment/gated content), per the spec.
@@ -1125,6 +1286,7 @@ git tag phase-1-complete
 ---
 
 ## Spec coverage check
+
 - Token CSS verbatim + global load → Tasks 5, 6. ✓
 - 4 DS components rebuilt from the bundle → Tasks 7–10. ✓
 - SiteHeader (dropdown + mobile menu) / SiteFooter → Tasks 12, 13. ✓
@@ -1136,4 +1298,7 @@ git tag phase-1-complete
 - Netlify config → Task 21. ✓
 - Fidelity checks → per-page steps + Task 22. ✓
 - Light theme only; dark Homepage ignored → route table + Global Constraints. ✓
+
+```
+
 ```

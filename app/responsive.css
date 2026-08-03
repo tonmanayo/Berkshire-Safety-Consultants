@@ -1,0 +1,27 @@
+/* Responsive layout overrides.
+   These rules apply ONLY below the breakpoints, so desktop rendering stays
+   identical to the approved design. !important is required to override the
+   pages' inline `grid-template-columns` styles (inline styles otherwise win).
+
+   Vocabulary (added as data-r attributes on grid containers):
+     data-r="split"  two-column section splits (hero/content+image, NfrNfr) → stack
+     data-r="cards"  card grids (repeat(3|4,1fr)) → 2-up on tablet, 1-up on phone
+*/
+
+@media (max-width: 820px) {
+  [data-r="split"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 900px) {
+  [data-r="cards"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  [data-r="cards"] {
+    grid-template-columns: 1fr !important;
+  }
+}

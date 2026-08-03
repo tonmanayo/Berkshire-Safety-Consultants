@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import "./responsive.css";
 
 export const metadata: Metadata = {
   title: "Berkshire Safety Consultants — Health & Safety Consultancy",

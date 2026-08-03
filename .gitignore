@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Project uses npm; block pnpm/yarn lockfiles to avoid package-manager drift
+pnpm-lock.yaml
+yarn.lock

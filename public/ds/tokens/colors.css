@@ -1,0 +1,69 @@
+/* Berkshire Safety Consultants — Colour System
+   Two brand colours carry the identity:
+   • Deep Navy  #0E033C — bold, authoritative; primary backgrounds & text
+   • Lime Green  #CFE056 — energetic accent; headlines, icons, frames, CTAs
+   Navy is extended into a tonal scale for surfaces/borders; lime gets
+   hover/press steps. Neutrals support light-mode UI surfaces. */
+
+:root {
+  /* ---- Deep Navy scale (brand primary) ---- */
+  --navy-950: #08021f;   /* darkest — deep shadow fills */
+  --navy-900: #0e033c;   /* PRIMARY brand navy */
+  --navy-800: #190c4f;   /* raised navy surface */
+  --navy-700: #251563;   /* violet-navy (gradient partner) */
+  --navy-600: #342178;   /* hover on navy surfaces */
+  --navy-500: #4a358f;   /* muted navy text on light */
+
+  /* ---- Lime Green scale (brand accent) ---- */
+  --lime-300: #e3ee8e;   /* tint — soft fills, large blocks */
+  --lime-400: #d9e870;   /* light accent */
+  --lime-500: #cfe056;   /* PRIMARY brand lime */
+  --lime-600: #bdd03f;   /* hover */
+  --lime-700: #a4b62f;   /* press / on-light contrast */
+
+  /* ---- Neutrals ---- */
+  --white:     #ffffff;
+  --paper:     #f7f7fb;  /* off-white page on light surfaces */
+  --mist:      #eceaf3;  /* light borders / dividers on paper */
+  --gray-300:  #cdc9da;
+  --gray-500:  #8a85a3;  /* muted text on light */
+  --gray-700:  #4a4663;  /* body text on light */
+  --ink:       #1a1530;  /* near-black text on light */
+
+  /* ---- Semantic status (used sparingly; brand stays navy/lime) ---- */
+  --danger:   #e2563f;   /* alarm red — fire / hazard call-outs */
+  --warning:  #f0a832;
+  --success:  #5fae6a;
+
+  /* ================= SEMANTIC ALIASES ================= */
+  /* Backgrounds */
+  --bg-base:          var(--navy-900);   /* default brand background */
+  --bg-raised:        var(--navy-800);
+  --bg-violet:        var(--navy-700);
+  --bg-paper:         var(--paper);      /* light surface background */
+  --surface-card:     var(--navy-800);   /* card on navy */
+  --surface-card-light: var(--white);    /* card on paper */
+
+  /* Text */
+  --text-on-dark:     var(--white);
+  --text-on-dark-muted: rgba(255,255,255,0.72);
+  --text-on-light:    var(--ink);
+  --text-on-light-muted: var(--gray-700);
+  --text-accent:      var(--lime-500);
+  --text-on-lime:     var(--navy-900);   /* text sat on a lime fill */
+
+  /* Accent */
+  --accent:           var(--lime-500);
+  --accent-hover:     var(--lime-600);
+  --accent-press:     var(--lime-700);
+  --accent-on-light:  var(--lime-700);   /* lime legible on white */
+
+  /* Lines & borders */
+  --border-on-dark:   rgba(255,255,255,0.16);
+  --border-on-light:  var(--mist);
+  --border-accent:    var(--lime-500);
+  --divider-on-dark:  rgba(255,255,255,0.12);
+
+  /* Focus ring */
+  --focus-ring:       var(--lime-400);
+}

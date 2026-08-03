@@ -1,0 +1,45 @@
+/* Berkshire Safety Consultants — Brand Motifs (reusable utility classes)
+   Distinctive surface treatments pulled straight from the brand collateral:
+   hazard-tape diagonals, halftone dot fields, and the wordmark accent rule.
+   All driven by the colour tokens so they recolour with the palette. */
+
+/* Diagonal hazard-tape stripes — lime on navy. Use as a thin band or accent. */
+.bsc-hazard-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--lime-500) 0, var(--lime-500) 14px,
+    var(--navy-900) 14px, var(--navy-900) 28px
+  );
+}
+
+/* Halftone dot field — lime dots fading out, as in the fire-door collateral. */
+.bsc-halftone {
+  background-image: radial-gradient(var(--lime-500) 22%, transparent 23%);
+  background-size: 18px 18px;
+}
+
+/* Lime accent rule — the bar under the stacked wordmark / eyebrow labels. */
+.bsc-accent-rule {
+  display: inline-block;
+  width: 3.5rem;
+  height: 4px;
+  background: var(--lime-500);
+  border-radius: var(--radius-pill);
+}
+
+/* Lime highlight behind text — the "FIRE DOOR" block treatment. */
+.bsc-highlight {
+  background: var(--lime-500);
+  color: var(--navy-900);
+  padding: 0.05em 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Navy protection gradient — drop over warm photography to seat white text. */
+.bsc-photo-scrim {
+  background: linear-gradient(180deg,
+    rgba(14,3,60,0.55) 0%,
+    rgba(14,3,60,0.82) 70%,
+    rgba(8,2,31,0.95) 100%);
+}

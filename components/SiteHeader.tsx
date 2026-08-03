@@ -153,45 +153,53 @@ export function SiteHeader({ active }: SiteHeaderProps) {
 
               {servicesOpen && (
                 <div
-                  role="menu"
                   style={{
                     position: "absolute",
-                    top: "calc(100% + 14px)",
+                    top: "100%",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    minWidth: "300px",
-                    background: "var(--navy-800)",
-                    border: "1px solid var(--border-on-dark)",
-                    borderRadius: "14px",
-                    padding: "10px",
-                    boxShadow: "0 18px 40px rgba(0,0,0,0.45)",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2px",
+                    // Transparent bridge across the 14px gap so moving the cursor
+                    // from the trigger to the menu doesn't fire onMouseLeave.
+                    paddingTop: "14px",
                   }}
                 >
-                  {SERVICES.map((svc) => {
-                    const Icon = ICON_MAP[svc.icon];
-                    return (
-                      <Link
-                        key={svc.key}
-                        href={svc.href}
-                        role="menuitem"
-                        style={DROPDOWN_ITEM_BASE}
-                      >
-                        {Icon && (
-                          <Icon
-                            style={{
-                              width: "18px",
-                              height: "18px",
-                              color: "var(--lime-500)",
-                            }}
-                          />
-                        )}
-                        {svc.label}
-                      </Link>
-                    );
-                  })}
+                  <div
+                    role="menu"
+                    style={{
+                      minWidth: "300px",
+                      background: "var(--navy-800)",
+                      border: "1px solid var(--border-on-dark)",
+                      borderRadius: "14px",
+                      padding: "10px",
+                      boxShadow: "0 18px 40px rgba(0,0,0,0.45)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "2px",
+                    }}
+                  >
+                    {SERVICES.map((svc) => {
+                      const Icon = ICON_MAP[svc.icon];
+                      return (
+                        <Link
+                          key={svc.key}
+                          href={svc.href}
+                          role="menuitem"
+                          style={DROPDOWN_ITEM_BASE}
+                        >
+                          {Icon && (
+                            <Icon
+                              style={{
+                                width: "18px",
+                                height: "18px",
+                                color: "var(--lime-500)",
+                              }}
+                            />
+                          )}
+                          {svc.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>

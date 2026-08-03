@@ -304,7 +304,7 @@ export default function HomePage() {
             }}
           >
             <img
-              src="/assets/elearning-placeholder.png"
+              src="/assets/slots/bsc-elearning.webp"
               alt="Online learning session photo"
               style={{
                 display: "block",
@@ -397,7 +397,7 @@ export default function HomePage() {
               }}
             >
               <img
-                src="/assets/svc-housing-placeholder.png"
+                src="/assets/slots/bsc-svc-housing.webp"
                 alt="Modern housing complex"
                 style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
               />
@@ -458,7 +458,7 @@ export default function HomePage() {
               }}
             >
               <img
-                src="/assets/svc-pd-placeholder.png"
+                src="/assets/slots/bsc-svc-pd.webp"
                 alt="Team of engineers on site"
                 style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
               />
@@ -519,7 +519,7 @@ export default function HomePage() {
               }}
             >
               <img
-                src="/assets/svc-sme-placeholder.png"
+                src="/assets/slots/bsc-svc-sme.webp"
                 alt="Industrial tools / small workshop"
                 style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
               />
@@ -580,7 +580,7 @@ export default function HomePage() {
               }}
             >
               <img
-                src="/assets/svc-firstaid-placeholder.png"
+                src="/assets/slots/bsc-svc-firstaid.webp"
                 alt="Emergency rescue / first aid scene"
                 style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
               />
@@ -797,7 +797,7 @@ export default function HomePage() {
             }}
           >
             <img
-              src="/assets/about-placeholder.png"
+              src="/assets/slots/bsc-about.webp"
               alt="Steve / the BSC team at work"
               style={{
                 display: "block",
@@ -1063,7 +1063,7 @@ export default function HomePage() {
             }}
           >
             <img
-              src="/assets/hardhat-placeholder.png"
+              src="/assets/slots/bsc-hardhat.webp"
               alt="Construction site / hard hat"
               style={{
                 display: "block",

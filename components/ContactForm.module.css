@@ -1,0 +1,16 @@
+.field {
+  width: 100%;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--mist);
+  border-radius: 12px;
+  padding: 13px 15px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.field:focus {
+  border-color: var(--lime-500);
+}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Accessibility } from "lucide-react";
 
 export const metadata = {
@@ -84,12 +85,9 @@ export default function AccessibilityStatementPage() {
         >
           <p>
             Berkshire Safety Consultants is committed to making our website (
-            <a href="https://www.berkshiresafetyconsultants.com/" target="_blank" rel="noopener">
-              berkshiresafetyconsultants.com
-            </a>
-            ) accessible to everyone, including people with disabilities. This commitment reflects
-            our core value of Your Safety &amp; Care, ensuring a secure and usable experience for
-            all visitors.
+            <Link href="/">berkshiresafetyconsultants.com</Link>) accessible to everyone, including
+            people with disabilities. This commitment reflects our core value of Your Safety &amp;
+            Care, ensuring a secure and usable experience for all visitors.
           </p>
 
           <h2

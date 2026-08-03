@@ -7,11 +7,13 @@ test("renders all FAQ questions", () => {
   expect(screen.getByText("What areas do you cover?")).toBeInTheDocument();
 });
 
-test("answers are not visible initially", () => {
+test("answer panels are rendered but hidden initially", () => {
   render(<FaqAccordion />);
-  expect(
-    screen.queryByText(/UK-based health and safety consultancy headquartered in Maidenhead/),
-  ).not.toBeInTheDocument();
+  const panel = screen
+    .getByText(/UK-based health and safety consultancy headquartered in Maidenhead/)
+    .closest("[id^='faq-answer-']");
+  expect(panel).toBeInTheDocument();
+  expect(panel).not.toBeVisible();
 });
 
 test("clicking a question reveals its answer", () => {
@@ -20,9 +22,10 @@ test("clicking a question reveals its answer", () => {
     name: /What is Berkshire Safety Consultants\?/,
   });
   fireEvent.click(btn);
-  expect(
-    screen.getByText(/UK-based health and safety consultancy headquartered in Maidenhead/),
-  ).toBeInTheDocument();
+  const panel = screen
+    .getByText(/UK-based health and safety consultancy headquartered in Maidenhead/)
+    .closest("[id^='faq-answer-']");
+  expect(panel).toBeVisible();
 });
 
 test("clicking the open question again closes it", () => {
@@ -31,13 +34,12 @@ test("clicking the open question again closes it", () => {
     name: /What is Berkshire Safety Consultants\?/,
   });
   fireEvent.click(btn);
-  expect(
-    screen.getByText(/UK-based health and safety consultancy headquartered in Maidenhead/),
-  ).toBeInTheDocument();
+  const panel = screen
+    .getByText(/UK-based health and safety consultancy headquartered in Maidenhead/)
+    .closest("[id^='faq-answer-']");
+  expect(panel).toBeVisible();
   fireEvent.click(btn);
-  expect(
-    screen.queryByText(/UK-based health and safety consultancy headquartered in Maidenhead/),
-  ).not.toBeInTheDocument();
+  expect(panel).not.toBeVisible();
 });
 
 test("opening one item closes a previously open item (single-open behaviour)", () => {
@@ -48,16 +50,18 @@ test("opening one item closes a previously open item (single-open behaviour)", (
   const btn2 = screen.getByRole("button", { name: /What areas do you cover\?/ });
 
   fireEvent.click(btn1);
-  expect(
-    screen.getByText(/UK-based health and safety consultancy headquartered in Maidenhead/),
-  ).toBeInTheDocument();
+  const panel1 = screen
+    .getByText(/UK-based health and safety consultancy headquartered in Maidenhead/)
+    .closest("[id^='faq-answer-']");
+  expect(panel1).toBeVisible();
 
   fireEvent.click(btn2);
   // first answer hidden, second answer visible
-  expect(
-    screen.queryByText(/UK-based health and safety consultancy headquartered in Maidenhead/),
-  ).not.toBeInTheDocument();
-  expect(screen.getByText(/we work with clients across the UK/)).toBeInTheDocument();
+  expect(panel1).not.toBeVisible();
+  const panel2 = screen
+    .getByText(/we work with clients across the UK/)
+    .closest("[id^='faq-answer-']");
+  expect(panel2).toBeVisible();
 });
 
 test("aria-expanded reflects open state", () => {
@@ -68,4 +72,14 @@ test("aria-expanded reflects open state", () => {
   expect(btn).toHaveAttribute("aria-expanded", "false");
   fireEvent.click(btn);
   expect(btn).toHaveAttribute("aria-expanded", "true");
+});
+
+test("button has aria-controls pointing to the answer panel id", () => {
+  render(<FaqAccordion />);
+  const btn = screen.getByRole("button", {
+    name: /What is Berkshire Safety Consultants\?/,
+  });
+  const controlsId = btn.getAttribute("aria-controls");
+  expect(controlsId).toBeTruthy();
+  expect(document.getElementById(controlsId!)).toBeInTheDocument();
 });

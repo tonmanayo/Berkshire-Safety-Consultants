@@ -31,14 +31,7 @@ export default function ELearningPage() {
             background: "linear-gradient(180deg, rgba(14,3,60,0.72) 0%, rgba(8,2,31,0.95) 100%)",
           }}
         />
-        <div
-          style={{
-            height: 5,
-            position: "relative",
-            background:
-              "var(--hazard-stripes, repeating-linear-gradient(45deg, var(--lime-500) 0, var(--lime-500) 10px, var(--navy-900) 10px, var(--navy-900) 20px))",
-          }}
-        />
+        <div className="bsc-hazard-stripes" style={{ height: 5, position: "relative" }} />
         <div
           style={{
             position: "relative",

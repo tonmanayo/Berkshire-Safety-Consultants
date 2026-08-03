@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ds/Button";
 import { CheckCircle2, Send } from "lucide-react";
+import styles from "./ContactForm.module.css";
 
 export function ContactForm() {
   const [firstName, setFirstName] = useState("");
@@ -17,19 +18,6 @@ export function ContactForm() {
     if (!firstName.trim() || !lastName.trim() || !email.trim()) return;
     setSubmitted(true);
   }
-
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    fontFamily: "var(--font-primary)",
-    fontSize: 15,
-    color: "var(--ink)",
-    background: "var(--white)",
-    border: "1.5px solid var(--mist)",
-    borderRadius: 12,
-    padding: "13px 15px",
-    outline: "none",
-    boxSizing: "border-box",
-  };
 
   const labelStyle: React.CSSProperties = {
     display: "block",
@@ -78,17 +66,11 @@ export function ContactForm() {
           </label>
           <input
             id="firstName"
-            style={inputStyle}
+            className={styles.field}
             type="text"
             placeholder="Jane"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            onFocus={(e) => {
-              e.currentTarget.style.borderColor = "var(--lime-500)";
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.borderColor = "var(--mist)";
-            }}
           />
         </div>
         <div>
@@ -97,17 +79,11 @@ export function ContactForm() {
           </label>
           <input
             id="lastName"
-            style={inputStyle}
+            className={styles.field}
             type="text"
             placeholder="Doe"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            onFocus={(e) => {
-              e.currentTarget.style.borderColor = "var(--lime-500)";
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.borderColor = "var(--mist)";
-            }}
           />
         </div>
       </div>
@@ -117,17 +93,11 @@ export function ContactForm() {
         </label>
         <input
           id="email"
-          style={inputStyle}
+          className={styles.field}
           type="email"
           placeholder="jane@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = "var(--lime-500)";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = "var(--mist)";
-          }}
         />
       </div>
       <div>
@@ -136,17 +106,12 @@ export function ContactForm() {
         </label>
         <textarea
           id="message"
-          style={{ ...inputStyle, resize: "vertical" }}
+          className={styles.field}
+          style={{ resize: "vertical" }}
           rows={5}
           placeholder="Tell us a little about your project or question…"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = "var(--lime-500)";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = "var(--mist)";
-          }}
         />
       </div>
       <label

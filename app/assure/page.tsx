@@ -1345,7 +1345,6 @@ export default function AssurePage() {
       <section
         style={{
           background: "var(--paper)",
-          height: 441,
           display: "flex",
           alignItems: "center",
         }}

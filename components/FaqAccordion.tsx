@@ -71,6 +71,7 @@ export function FaqAccordion() {
             <button
               onClick={() => toggle(i)}
               aria-expanded={isOpen}
+              aria-controls={`faq-answer-${i}`}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -104,18 +105,18 @@ export function FaqAccordion() {
                 />
               )}
             </button>
-            {isOpen && (
-              <div
-                style={{
-                  padding: "0 26px 24px",
-                  fontSize: 15.5,
-                  lineHeight: 1.7,
-                  color: "var(--gray-700)",
-                }}
-              >
-                {item.a}
-              </div>
-            )}
+            <div
+              id={`faq-answer-${i}`}
+              hidden={!isOpen}
+              style={{
+                padding: "0 26px 24px",
+                fontSize: 15.5,
+                lineHeight: 1.7,
+                color: "var(--gray-700)",
+              }}
+            >
+              {item.a}
+            </div>
           </div>
         );
       })}

@@ -135,7 +135,7 @@ export default function FirstAidFireMarshalTrainingPage() {
               <span style={{ color: "var(--accent-on-light)" }}>delivered on-site</span>
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div data-r="split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
             <article
               style={{
                 background: "var(--paper)",

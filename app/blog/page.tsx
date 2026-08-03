@@ -175,6 +175,7 @@ export default function BlogPage() {
             style={{ textDecoration: "none", display: "block" }}
           >
             <article
+              data-r="split"
               style={{
                 display: "grid",
                 gridTemplateColumns: "1.1fr 0.9fr",
@@ -252,6 +253,7 @@ export default function BlogPage() {
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 24px 84px" }}>
           <div
+            data-r="cards"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",

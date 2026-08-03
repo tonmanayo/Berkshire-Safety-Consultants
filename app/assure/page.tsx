@@ -215,7 +215,7 @@ export default function AssurePage() {
             drives. A fragile system that creates risk, not confidence.
           </p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
+          <div data-r="split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
             <article
               style={{
                 background: "var(--paper)",
@@ -362,7 +362,7 @@ export default function AssurePage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div data-r="split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
             <article
               style={{
                 background: "var(--navy-800)",
@@ -561,7 +561,10 @@ export default function AssurePage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
+          <div
+            data-r="cards"
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}
+          >
             <article
               style={{
                 background: "var(--paper)",
@@ -887,6 +890,7 @@ export default function AssurePage() {
           </div>
 
           <div
+            data-r="cards"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",

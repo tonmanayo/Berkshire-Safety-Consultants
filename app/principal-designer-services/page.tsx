@@ -99,6 +99,7 @@ export default function PrincipalDesignerServicesPage() {
       {/* WHAT IS A PD (light) */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -291,7 +292,10 @@ export default function PrincipalDesignerServicesPage() {
               <span style={{ color: "var(--lime-500)" }}>Health &amp; Safety File</span>
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}>
+          <div
+            data-r="cards"
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}
+          >
             <article
               style={{
                 background: "var(--navy-800)",

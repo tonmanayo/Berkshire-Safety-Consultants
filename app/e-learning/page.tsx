@@ -133,6 +133,7 @@ export default function ELearningPage() {
       {/* PACKAGES */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="cards"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -566,7 +567,7 @@ export default function ELearningPage() {
             packages are designed around what each role group genuinely needs.
           </p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+          <div data-r="split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             {[
               {
                 title: "Accredited & audit-ready",

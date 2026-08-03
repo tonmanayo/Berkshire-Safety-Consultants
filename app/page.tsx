@@ -177,6 +177,7 @@ export default function HomePage() {
       {/* ====================== E-LEARNING (light) ====================== */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -357,7 +358,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }}>
+          <div data-r="split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }}>
             <article
               style={{
                 display: "flex",
@@ -655,6 +656,7 @@ export default function HomePage() {
             equipped with the expertise to deliver exceptional service.
           </p>
           <div
+            data-r="cards"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
@@ -750,6 +752,7 @@ export default function HomePage() {
       {/* ====================== ABOUT (navy contrast band) ====================== */}
       <section style={{ background: "var(--navy-900)", color: "var(--white)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -988,6 +991,7 @@ export default function HomePage() {
       {/* ====================== HARD HAT AWARENESS (light) ====================== */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",

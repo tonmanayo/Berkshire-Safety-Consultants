@@ -85,6 +85,7 @@ export default function ContactPage() {
       {/* FORM + DETAILS */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1140,
             margin: "0 auto",

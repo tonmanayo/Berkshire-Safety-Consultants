@@ -87,6 +87,7 @@ export default function ServicesPage() {
       {/* SERVICE 1: HOUSING (light) */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -252,6 +253,7 @@ export default function ServicesPage() {
       {/* SERVICE 2: PRINCIPAL DESIGNER (navy) */}
       <section style={{ background: "var(--navy-900)", color: "var(--white)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -397,6 +399,7 @@ export default function ServicesPage() {
       {/* SERVICE 3: SMALL BUSINESSES (light) */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -561,6 +564,7 @@ export default function ServicesPage() {
       {/* SERVICE 4: FIRST AID (navy) */}
       <section style={{ background: "var(--navy-900)", color: "var(--white)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",

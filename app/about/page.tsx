@@ -85,6 +85,7 @@ export default function AboutPage() {
       {/* STORY (light) */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div
+          data-r="split"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -209,7 +210,10 @@ export default function AboutPage() {
               The <span style={{ color: "var(--lime-500)" }}>SAFETY</span> we stand for
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}>
+          <div
+            data-r="cards"
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}
+          >
             <article
               style={{
                 background: "var(--navy-800)",
@@ -467,7 +471,10 @@ export default function AboutPage() {
               The people behind <span style={{ color: "var(--accent-on-light)" }}>your safety</span>
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 26 }}>
+          <div
+            data-r="cards"
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 26 }}
+          >
             <article
               style={{
                 background: "var(--paper)",

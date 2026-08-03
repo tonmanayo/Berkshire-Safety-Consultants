@@ -27,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           background: "var(--paper)",
           color: "var(--ink)",
           fontFamily: "var(--font-primary)",
+          overflowX: "hidden",
         }}
       >
         <SiteHeader />

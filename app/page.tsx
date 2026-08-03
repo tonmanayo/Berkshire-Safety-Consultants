@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ds/Button";
 import { Tag } from "@/components/ds/Tag";
+import { SectionHeading } from "@/components/ds/SectionHeading";
 import {
   ShieldCheck,
   ArrowRight,
@@ -332,41 +333,12 @@ export default function HomePage() {
               marginBottom: 48,
             }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--lime-500)",
-                }}
-              >
-                Our services
-              </span>
-              <span
-                style={{
-                  width: "3.5rem",
-                  height: 4,
-                  borderRadius: 999,
-                  background: "var(--lime-500)",
-                }}
-              />
-              <h2
-                style={{
-                  margin: 0,
-                  fontWeight: 800,
-                  fontStyle: "italic",
-                  textTransform: "uppercase",
-                  fontSize: 36,
-                  lineHeight: 1.05,
-                  color: "var(--white)",
-                }}
-              >
-                Solutions tailored to{" "}
-                <span style={{ color: "var(--lime-500)" }}>your every need</span>
-              </h2>
-            </div>
+            <SectionHeading
+              eyebrow="Our services"
+              title="Solutions tailored to"
+              accent="your every need"
+              tone="onDark"
+            />
             <Link
               href="/services"
               style={{
@@ -810,40 +782,12 @@ export default function HomePage() {
             />
           </div>
           <div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--lime-500)",
-                }}
-              >
-                About
-              </span>
-              <span
-                style={{
-                  width: "3.5rem",
-                  height: 4,
-                  borderRadius: 999,
-                  background: "var(--lime-500)",
-                }}
-              />
-              <h2
-                style={{
-                  margin: 0,
-                  fontWeight: 800,
-                  fontStyle: "italic",
-                  textTransform: "uppercase",
-                  fontSize: 36,
-                  lineHeight: 1.05,
-                  color: "var(--white)",
-                }}
-              >
-                Berkshire Safety <span style={{ color: "var(--lime-500)" }}>Consultants</span>
-              </h2>
-            </div>
+            <SectionHeading
+              eyebrow="About"
+              title="Berkshire Safety"
+              accent="Consultants"
+              tone="onDark"
+            />
             <p
               style={{
                 margin: "24px 0 18px",

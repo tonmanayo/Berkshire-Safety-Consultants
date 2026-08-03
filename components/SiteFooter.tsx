@@ -16,6 +16,7 @@ export function SiteFooter() {
       <div style={{ height: "5px" }} className="bsc-hazard-stripes" />
 
       <div
+        data-r="cards"
         style={{
           maxWidth: "1200px",
           margin: "0 auto",

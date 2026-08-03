@@ -346,7 +346,6 @@ export function SiteHeader({ active }: SiteHeaderProps) {
               href="/contact"
               variant="primary"
               size="md"
-              fullWidth
               onClick={() => setMobileOpen(false)}
             >
               Contact

@@ -21,8 +21,8 @@ export function ContactForm() {
     setError(false);
     setSubmitting(true);
     try {
-      // POST to the static detection form so Netlify Forms captures the entry.
-      const res = await fetch("/__forms.html", {
+      // POST to the site root so Netlify Forms captures the entry (per Netlify docs).
+      const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
@@ -87,6 +87,7 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: 18 }}
     >
+      <input type="hidden" name="form-name" value="contact" />
       <div data-r="split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div>
           <label style={labelStyle} htmlFor="firstName">

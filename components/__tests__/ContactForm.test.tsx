@@ -25,10 +25,7 @@ test("POSTs to the Netlify detection form and shows the success state", async ()
   await user.click(screen.getByRole("button", { name: /submit/i }));
 
   expect(await screen.findByText(/message sent/i)).toBeInTheDocument();
-  expect(fetchMock).toHaveBeenCalledWith(
-    "/__forms.html",
-    expect.objectContaining({ method: "POST" }),
-  );
+  expect(fetchMock).toHaveBeenCalledWith("/", expect.objectContaining({ method: "POST" }));
   const body = String(fetchMock.mock.calls[0][1]?.body);
   expect(body).toContain("form-name=contact");
   expect(body).toContain("email=jane%40example.com");

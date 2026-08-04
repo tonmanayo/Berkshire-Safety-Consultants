@@ -11,7 +11,7 @@
       which Netlify's scanner cannot see, so it POSTs its data here.
       Field names MUST match the URLSearchParams body in ContactForm.tsx.
     -->
-    <form name="contact" data-netlify="true" hidden>
+    <form name="contact" method="POST" data-netlify="true" hidden>
       <input type="text" name="firstName" />
       <input type="text" name="lastName" />
       <input type="email" name="email" />

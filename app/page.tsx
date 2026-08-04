@@ -667,11 +667,25 @@ export default function HomePage() {
                 gap: 14,
               }}
             >
-              <img
-                src="/assets/badge-iso-45001.png"
-                alt="ISO 45001:2018 Occupational Health & Safety Management"
-                style={{ height: 92, width: "auto", maxWidth: "100%" }}
-              />
+              <div
+                style={{
+                  height: 170,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src="/assets/badge-iso-45001.png"
+                  alt="ISO 45001:2018 Occupational Health & Safety Management"
+                  style={{
+                    maxHeight: "100%",
+                    width: "auto",
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 ISO 45001:2018
               </div>
@@ -692,11 +706,25 @@ export default function HomePage() {
                 gap: 14,
               }}
             >
-              <img
-                src="/assets/badge-iso-9001.png"
-                alt="ISO 9001:2015 Quality Management"
-                style={{ height: 92, width: "auto", maxWidth: "100%" }}
-              />
+              <div
+                style={{
+                  height: 170,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src="/assets/badge-iso-9001.png"
+                  alt="ISO 9001:2015 Quality Management"
+                  style={{
+                    maxHeight: "100%",
+                    width: "auto",
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 ISO 9001
               </div>
@@ -715,11 +743,25 @@ export default function HomePage() {
                 gap: 14,
               }}
             >
-              <img
-                src="/assets/badge-ssip.png"
-                alt="SSIP Approved — Safety Schemes in Procurement"
-                style={{ height: 92, width: "auto", maxWidth: "100%" }}
-              />
+              <div
+                style={{
+                  height: 170,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src="/assets/badge-ssip.png"
+                  alt="SSIP Approved — Safety Schemes in Procurement"
+                  style={{
+                    maxHeight: "100%",
+                    width: "auto",
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 SSIP Approved
               </div>
@@ -740,7 +782,16 @@ export default function HomePage() {
                 gap: 14,
               }}
             >
-              <Compass style={{ width: 36, height: 36, color: "var(--accent-on-light)" }} />
+              <div
+                style={{
+                  height: 170,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Compass style={{ width: 72, height: 72, color: "var(--accent-on-light)" }} />
+              </div>
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 CDM 2015
               </div>

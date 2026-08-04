@@ -883,13 +883,21 @@ export default function HomePage() {
                 padding: "18px 32px",
                 border: "1px solid var(--mist)",
                 borderRadius: 12,
-                fontSize: 18,
-                fontWeight: 700,
-                letterSpacing: "0.02em",
-                color: "var(--gray-700)",
+                display: "inline-flex",
+                alignItems: "center",
               }}
             >
-              EHSL UK
+              <img
+                src="/assets/logo-ehsl.svg"
+                alt="EHSL UK"
+                style={{
+                  height: 40,
+                  width: "auto",
+                  maxWidth: 160,
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
             </a>
             <a
               href="https://www.housingsolutions.co.uk/"
@@ -898,13 +906,21 @@ export default function HomePage() {
                 padding: "18px 32px",
                 border: "1px solid var(--mist)",
                 borderRadius: 12,
-                fontSize: 18,
-                fontWeight: 700,
-                letterSpacing: "0.02em",
-                color: "var(--gray-700)",
+                display: "inline-flex",
+                alignItems: "center",
               }}
             >
-              Housing Solutions
+              <img
+                src="/assets/logo-housing-solutions.png"
+                alt="Housing Solutions"
+                style={{
+                  height: 40,
+                  width: "auto",
+                  maxWidth: 160,
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
             </a>
             <a
               href="https://sojokitchen.com/"
@@ -913,13 +929,21 @@ export default function HomePage() {
                 padding: "18px 32px",
                 border: "1px solid var(--mist)",
                 borderRadius: 12,
-                fontSize: 18,
-                fontWeight: 700,
-                letterSpacing: "0.02em",
-                color: "var(--gray-700)",
+                display: "inline-flex",
+                alignItems: "center",
               }}
             >
-              Sojo Kitchen
+              <img
+                src="/assets/logo-sojo.png"
+                alt="Sojo Kitchen"
+                style={{
+                  height: 40,
+                  width: "auto",
+                  maxWidth: 160,
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
             </a>
             <a
               href="https://www.icsroofing.co.uk/"
@@ -928,13 +952,21 @@ export default function HomePage() {
                 padding: "18px 32px",
                 border: "1px solid var(--mist)",
                 borderRadius: 12,
-                fontSize: 18,
-                fontWeight: 700,
-                letterSpacing: "0.02em",
-                color: "var(--gray-700)",
+                display: "inline-flex",
+                alignItems: "center",
               }}
             >
-              ICS Roofing
+              <img
+                src="/assets/logo-ics.png"
+                alt="ICS Roofing"
+                style={{
+                  height: 40,
+                  width: "auto",
+                  maxWidth: 160,
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
             </a>
           </div>
         </div>

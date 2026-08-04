@@ -670,7 +670,7 @@ export default function HomePage() {
               <img
                 src="/assets/badge-iso-45001.png"
                 alt="ISO 45001:2018 Occupational Health & Safety Management"
-                style={{ height: 72, width: "auto", maxWidth: "100%" }}
+                style={{ height: 92, width: "auto", maxWidth: "100%" }}
               />
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 ISO 45001:2018
@@ -695,7 +695,7 @@ export default function HomePage() {
               <img
                 src="/assets/badge-iso-9001.png"
                 alt="ISO 9001:2015 Quality Management"
-                style={{ height: 72, width: "auto", maxWidth: "100%" }}
+                style={{ height: 92, width: "auto", maxWidth: "100%" }}
               />
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 ISO 9001
@@ -718,7 +718,7 @@ export default function HomePage() {
               <img
                 src="/assets/badge-ssip.png"
                 alt="SSIP Approved — Safety Schemes in Procurement"
-                style={{ height: 72, width: "auto", maxWidth: "100%" }}
+                style={{ height: 92, width: "auto", maxWidth: "100%" }}
               />
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 SSIP Approved
@@ -891,9 +891,9 @@ export default function HomePage() {
                 src="/assets/logo-ehsl.svg"
                 alt="EHSL UK"
                 style={{
-                  height: 40,
+                  height: 56,
                   width: "auto",
-                  maxWidth: 160,
+                  maxWidth: 190,
                   objectFit: "contain",
                   display: "block",
                 }}
@@ -914,9 +914,9 @@ export default function HomePage() {
                 src="/assets/logo-housing-solutions.png"
                 alt="Housing Solutions"
                 style={{
-                  height: 40,
+                  height: 56,
                   width: "auto",
-                  maxWidth: 160,
+                  maxWidth: 190,
                   objectFit: "contain",
                   display: "block",
                 }}
@@ -937,9 +937,9 @@ export default function HomePage() {
                 src="/assets/logo-sojo.png"
                 alt="Sojo Kitchen"
                 style={{
-                  height: 40,
+                  height: 56,
                   width: "auto",
-                  maxWidth: 160,
+                  maxWidth: 190,
                   objectFit: "contain",
                   display: "block",
                 }}
@@ -960,9 +960,9 @@ export default function HomePage() {
                 src="/assets/logo-ics.png"
                 alt="ICS Roofing"
                 style={{
-                  height: 40,
+                  height: 56,
                   width: "auto",
-                  maxWidth: 160,
+                  maxWidth: 190,
                   objectFit: "contain",
                   display: "block",
                 }}

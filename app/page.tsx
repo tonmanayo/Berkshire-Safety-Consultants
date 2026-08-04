@@ -968,8 +968,10 @@ export default function HomePage() {
                 }}
               />
             </a>
-            <div
+            <a
+              href="https://hamandco.com/"
               style={{
+                textDecoration: "none",
                 padding: "18px 32px",
                 border: "1px solid var(--mist)",
                 borderRadius: 12,
@@ -988,7 +990,7 @@ export default function HomePage() {
                   display: "block",
                 }}
               />
-            </div>
+            </a>
           </div>
         </div>
       </section>

@@ -21,8 +21,10 @@ export function ContactForm() {
     setError(false);
     setSubmitting(true);
     try {
-      // POST to the site root so Netlify Forms captures the entry (per Netlify docs).
-      const res = await fetch("/", {
+      // POST to the static detection form's path. On a Next.js SSR site, POSTing to "/"
+      // hits the Next runtime (which 403s); the static /__forms.html path is handled by
+      // Netlify's form processor instead.
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({

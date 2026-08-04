@@ -2,16 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ds/Button";
 import { Tag } from "@/components/ds/Tag";
 import { SectionHeading } from "@/components/ds/SectionHeading";
-import {
-  ShieldCheck,
-  ArrowRight,
-  Check,
-  Award,
-  BadgeCheck,
-  Compass,
-  HardHat,
-  ExternalLink,
-} from "lucide-react";
+import { ShieldCheck, ArrowRight, Check, Compass, HardHat, ExternalLink } from "lucide-react";
 
 export const metadata = {
   title: "Berkshire Safety Consultants — Health & Safety Consultancy",
@@ -676,7 +667,11 @@ export default function HomePage() {
                 gap: 14,
               }}
             >
-              <ShieldCheck style={{ width: 36, height: 36, color: "var(--accent-on-light)" }} />
+              <img
+                src="/assets/badge-iso-45001.png"
+                alt="ISO 45001:2018 Occupational Health & Safety Management"
+                style={{ height: 72, width: "auto", maxWidth: "100%" }}
+              />
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 ISO 45001:2018
               </div>
@@ -697,7 +692,11 @@ export default function HomePage() {
                 gap: 14,
               }}
             >
-              <Award style={{ width: 36, height: 36, color: "var(--accent-on-light)" }} />
+              <img
+                src="/assets/badge-iso-9001.png"
+                alt="ISO 9001:2015 Quality Management"
+                style={{ height: 72, width: "auto", maxWidth: "100%" }}
+              />
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 ISO 9001
               </div>
@@ -716,7 +715,11 @@ export default function HomePage() {
                 gap: 14,
               }}
             >
-              <BadgeCheck style={{ width: 36, height: 36, color: "var(--accent-on-light)" }} />
+              <img
+                src="/assets/badge-ssip.png"
+                alt="SSIP Approved — Safety Schemes in Procurement"
+                style={{ height: 72, width: "auto", maxWidth: "100%" }}
+              />
               <div style={{ fontSize: 17, fontWeight: 800, color: "var(--navy-900)" }}>
                 SSIP Approved
               </div>

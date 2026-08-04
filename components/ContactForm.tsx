@@ -12,11 +12,35 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [subscribe, setSubscribe] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!firstName.trim() || !lastName.trim() || !email.trim()) return;
-    setSubmitted(true);
+    setError(false);
+    setSubmitting(true);
+    try {
+      // POST to the static detection form so Netlify Forms captures the entry.
+      const res = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          firstName,
+          lastName,
+          email,
+          message,
+          subscribe: subscribe ? "yes" : "no",
+        }).toString(),
+      });
+      if (!res.ok) throw new Error(`Submit failed: ${res.status}`);
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const labelStyle: React.CSSProperties = {
@@ -58,7 +82,11 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+    <form
+      name="contact"
+      onSubmit={handleSubmit}
+      style={{ display: "flex", flexDirection: "column", gap: 18 }}
+    >
       <div data-r="split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div>
           <label style={labelStyle} htmlFor="firstName">
@@ -66,6 +94,7 @@ export function ContactForm() {
           </label>
           <input
             id="firstName"
+            name="firstName"
             className={styles.field}
             type="text"
             placeholder="Jane"
@@ -79,6 +108,7 @@ export function ContactForm() {
           </label>
           <input
             id="lastName"
+            name="lastName"
             className={styles.field}
             type="text"
             placeholder="Doe"
@@ -93,6 +123,7 @@ export function ContactForm() {
         </label>
         <input
           id="email"
+          name="email"
           className={styles.field}
           type="email"
           placeholder="jane@company.com"
@@ -106,6 +137,7 @@ export function ContactForm() {
         </label>
         <textarea
           id="message"
+          name="message"
           className={styles.field}
           style={{ resize: "vertical" }}
           rows={5}
@@ -126,6 +158,7 @@ export function ContactForm() {
       >
         <input
           type="checkbox"
+          name="subscribe"
           checked={subscribe}
           onChange={(e) => setSubscribe(e.target.checked)}
           style={{ width: 18, height: 18, accentColor: "var(--lime-600)", flex: "none" }}
@@ -133,12 +166,22 @@ export function ContactForm() {
         Yes, subscribe me to your newsletter.
       </label>
       <div style={{ display: "inline-block" }}>
-        <Button type="submit" variant="primary" size="lg">
+        <Button type="submit" variant="primary" size="lg" disabled={submitting}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-            Submit <Send style={{ width: 17, height: 17 }} />
+            {submitting ? "Sending…" : "Submit"} <Send style={{ width: 17, height: 17 }} />
           </span>
         </Button>
       </div>
+      {error && (
+        <p style={{ margin: 0, fontSize: 14, color: "var(--danger)" }}>
+          Sorry — something went wrong sending your message. Please try again, or email us directly
+          at{" "}
+          <a href="mailto:info@berkshiresafetyconsultants.com" style={{ color: "var(--danger)" }}>
+            info@berkshiresafetyconsultants.com
+          </a>
+          .
+        </p>
+      )}
     </form>
   );
 }

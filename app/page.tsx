@@ -968,6 +968,27 @@ export default function HomePage() {
                 }}
               />
             </a>
+            <div
+              style={{
+                padding: "18px 32px",
+                border: "1px solid var(--mist)",
+                borderRadius: 12,
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src="/assets/logo-ham.png"
+                alt="HAM"
+                style={{
+                  height: 56,
+                  width: "auto",
+                  maxWidth: 190,
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
+            </div>
           </div>
         </div>
       </section>

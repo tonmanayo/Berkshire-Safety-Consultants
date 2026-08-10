@@ -3,10 +3,28 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import "./responsive.css";
 
+const SITE_URL = "https://www.berkshiresafetyconsultants.com";
+const SITE_TITLE = "Berkshire Safety Consultants — Health & Safety Consultancy";
+const SITE_DESCRIPTION =
+  "Expert health & safety consultancy for housing associations and small businesses. Practical advice that protects your people, not just box-ticking. ISO 45001 & ISO 9001 accredited.";
+
 export const metadata: Metadata = {
-  title: "Berkshire Safety Consultants — Health & Safety Consultancy",
-  description:
-    "Expert health & safety consultancy for housing associations and small businesses. Practical advice that protects your people, not just box-ticking. ISO 45001 & ISO 9001 accredited.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Berkshire Safety Consultants",
+    locale: "en_GB",
+    url: SITE_URL,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 const DS = "/ds";

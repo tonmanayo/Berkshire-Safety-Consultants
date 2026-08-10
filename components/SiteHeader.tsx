@@ -22,6 +22,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
 function keyFromPathname(pathname: string): string {
   if (pathname === "/") return "home";
   if (pathname.startsWith("/services")) return "services";
+  if (pathname.startsWith("/e-learning")) return "elearning";
+  if (pathname.startsWith("/assure")) return "assure";
   if (pathname.startsWith("/about")) return "about";
   if (pathname.startsWith("/blog")) return "blog";
   if (pathname.startsWith("/housing-associations")) return "housing";
@@ -203,6 +205,16 @@ export function SiteHeader({ active }: SiteHeaderProps) {
                 </div>
               )}
             </div>
+
+            {/* E-Learning */}
+            <Link href="/e-learning" style={{ ...NAV_LINK_BASE, color: linkColor("elearning") }}>
+              E-Learning
+            </Link>
+
+            {/* Assure */}
+            <Link href="/assure" style={{ ...NAV_LINK_BASE, color: linkColor("assure") }}>
+              Assure
+            </Link>
 
             {/* About us */}
             <Link href="/about" style={{ ...NAV_LINK_BASE, color: linkColor("about") }}>

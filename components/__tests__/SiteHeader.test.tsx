@@ -8,6 +8,9 @@ vi.mock("next/navigation", () => ({ usePathname: () => "/about" }));
 test("renders primary nav links and a Contact CTA", () => {
   render(<SiteHeader />);
   expect(screen.getAllByRole("link", { name: "About us" })[0]).toBeInTheDocument();
+  // E-Learning and Assure are top-level nav links (design parity)
+  expect(screen.getAllByRole("link", { name: "E-Learning" })[0]).toBeInTheDocument();
+  expect(screen.getAllByRole("link", { name: "Assure" })[0]).toBeInTheDocument();
   // Contact is rendered as a polymorphic Button link; assert at least one exists
   expect(screen.getAllByRole("link", { name: /contact/i }).length).toBeGreaterThanOrEqual(1);
 });

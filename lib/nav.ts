@@ -4,6 +4,8 @@ export type ServiceItem = NavItem & { icon: string };
 export const NAV: NavItem[] = [
   { href: "/", label: "Home", key: "home" },
   { href: "/services", label: "Services", key: "services" },
+  { href: "/e-learning", label: "E-Learning", key: "elearning" },
+  { href: "/assure", label: "Assure", key: "assure" },
   { href: "/about", label: "About us", key: "about" },
   { href: "/blog", label: "Blog", key: "blog" },
 ];

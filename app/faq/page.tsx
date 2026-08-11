@@ -1,6 +1,7 @@
 import { Button } from "@/components/ds/Button";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { ArrowRight, HelpCircle } from "lucide-react";
+import { faqPageLd } from "./faqs";
 
 export const metadata = {
   alternates: { canonical: "/faq" },
@@ -12,6 +13,10 @@ export const metadata = {
 export default function FaqPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageLd()) }}
+      />
       {/* HERO */}
       <section style={{ position: "relative", overflow: "hidden", background: "var(--navy-900)" }}>
         <div

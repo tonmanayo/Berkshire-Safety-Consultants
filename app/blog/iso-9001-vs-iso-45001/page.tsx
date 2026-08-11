@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
+import { blogPostingLd } from "../posts";
 import { Tag } from "@/components/ds/Tag";
 
 export const metadata = {
@@ -14,6 +15,12 @@ export const metadata = {
 export default function Iso9001VsIso45001Page() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogPostingLd("iso-9001-vs-iso-45001")),
+        }}
+      />
       <section style={{ position: "relative", overflow: "hidden", background: "var(--navy-900)" }}>
         <div
           style={{

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ds/Button";
 import { Tag } from "@/components/ds/Tag";
 import {
@@ -49,9 +50,11 @@ export default function FirstAidFireMarshalTrainingPage() {
           }}
         >
           <div style={{ maxWidth: 760 }}>
-            <img
+            <Image
               src="/assets/logo-red-cross-partnership.jpg"
               alt="In partnership with British Red Cross"
+              width={1039}
+              height={401}
               style={{ height: 48, width: "auto", borderRadius: 8, marginBottom: 20 }}
             />
             <h1

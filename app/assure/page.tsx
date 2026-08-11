@@ -1354,7 +1354,7 @@ export default function AssurePage() {
           alignItems: "center",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", width: "100%" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "84px 24px", width: "100%" }}>
           <div
             style={{
               background: "var(--lime-500)",

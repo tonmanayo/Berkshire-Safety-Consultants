@@ -1,6 +1,7 @@
 import { Button } from "@/components/ds/Button";
 import { Tag } from "@/components/ds/Tag";
 import { Layers, ArrowRight, Check } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
   alternates: { canonical: "/services" },
@@ -107,18 +108,23 @@ export default function ServicesPage() {
               background: "var(--paper)",
             }}
           >
-            <img
-              src="/assets/slots/svc-housing.webp"
-              alt="Residential housing block"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 330,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/svc-housing.webp"
+                alt="Residential housing block"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
           <div>
             <Tag variant="lime" size="sm">
@@ -381,18 +387,23 @@ export default function ServicesPage() {
               background: "var(--navy-800)",
             }}
           >
-            <img
-              src="/assets/slots/svc-pd.webp"
-              alt="Crane / construction site"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 330,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/svc-pd.webp"
+                alt="Crane / construction site"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -419,18 +430,23 @@ export default function ServicesPage() {
               background: "var(--paper)",
             }}
           >
-            <img
-              src="/assets/slots/svc-sme.webp"
-              alt="Workshop / industrial tools"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 330,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/svc-sme.webp"
+                alt="Workshop / industrial tools"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
           <div>
             <Tag variant="lime" size="sm">
@@ -692,18 +708,23 @@ export default function ServicesPage() {
               background: "var(--navy-800)",
             }}
           >
-            <img
-              src="/assets/slots/svc-firstaid.webp"
-              alt="First aid / CPR training"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 330,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/svc-firstaid.webp"
+                alt="First aid / CPR training"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </div>
       </section>

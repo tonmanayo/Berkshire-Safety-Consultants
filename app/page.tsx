@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ds/Button";
 import { Tag } from "@/components/ds/Tag";
 import { SectionHeading } from "@/components/ds/SectionHeading";
@@ -297,18 +298,23 @@ export default function HomePage() {
               background: "var(--paper)",
             }}
           >
-            <img
-              src="/assets/slots/bsc-elearning.webp"
-              alt="Online learning session photo"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 380,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/bsc-elearning.webp"
+                alt="Online learning session photo"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -361,11 +367,15 @@ export default function HomePage() {
                 overflow: "hidden",
               }}
             >
-              <img
-                src="/assets/slots/bsc-svc-housing.webp"
-                alt="Modern housing complex"
-                style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
-              />
+              <div style={{ position: "relative", width: "100%", height: 230 }}>
+                <Image
+                  src="/assets/slots/bsc-svc-housing.webp"
+                  alt="Modern housing complex"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "28px 30px 30px" }}>
                 <Tag variant="lime" size="sm">
                   Housing Associations
@@ -422,11 +432,15 @@ export default function HomePage() {
                 overflow: "hidden",
               }}
             >
-              <img
-                src="/assets/slots/bsc-svc-pd.webp"
-                alt="Team of engineers on site"
-                style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
-              />
+              <div style={{ position: "relative", width: "100%", height: 230 }}>
+                <Image
+                  src="/assets/slots/bsc-svc-pd.webp"
+                  alt="Team of engineers on site"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "28px 30px 30px" }}>
                 <Tag variant="lime" size="sm">
                   Principal Designer
@@ -483,11 +497,15 @@ export default function HomePage() {
                 overflow: "hidden",
               }}
             >
-              <img
-                src="/assets/slots/bsc-svc-sme.webp"
-                alt="Industrial tools / small workshop"
-                style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
-              />
+              <div style={{ position: "relative", width: "100%", height: 230 }}>
+                <Image
+                  src="/assets/slots/bsc-svc-sme.webp"
+                  alt="Industrial tools / small workshop"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "28px 30px 30px" }}>
                 <Tag variant="lime" size="sm">
                   Small &amp; Medium Businesses
@@ -544,11 +562,15 @@ export default function HomePage() {
                 overflow: "hidden",
               }}
             >
-              <img
-                src="/assets/slots/bsc-svc-firstaid.webp"
-                alt="Emergency rescue / first aid scene"
-                style={{ display: "block", width: "100%", height: 230, objectFit: "cover" }}
-              />
+              <div style={{ position: "relative", width: "100%", height: 230 }}>
+                <Image
+                  src="/assets/slots/bsc-svc-firstaid.webp"
+                  alt="Emergency rescue / first aid scene"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div style={{ padding: "28px 30px 30px" }}>
                 <Tag variant="outline" size="sm">
                   In partnership with British Red Cross
@@ -676,9 +698,11 @@ export default function HomePage() {
                   justifyContent: "center",
                 }}
               >
-                <img
+                <Image
                   src="/assets/badge-iso-45001.png"
                   alt="ISO 45001:2018 Occupational Health & Safety Management"
+                  width={175}
+                  height={338}
                   style={{
                     maxHeight: "100%",
                     width: "auto",
@@ -715,9 +739,11 @@ export default function HomePage() {
                   justifyContent: "center",
                 }}
               >
-                <img
+                <Image
                   src="/assets/badge-iso-9001.png"
                   alt="ISO 9001:2015 Quality Management"
+                  width={175}
+                  height={338}
                   style={{
                     maxHeight: "100%",
                     width: "auto",
@@ -752,9 +778,11 @@ export default function HomePage() {
                   justifyContent: "center",
                 }}
               >
-                <img
+                <Image
                   src="/assets/badge-ssip.png"
                   alt="SSIP Approved — Safety Schemes in Procurement"
+                  width={916}
+                  height={912}
                   style={{
                     maxHeight: "100%",
                     width: "auto",
@@ -826,18 +854,23 @@ export default function HomePage() {
               background: "var(--navy-800)",
             }}
           >
-            <img
-              src="/assets/slots/bsc-about.webp"
-              alt="Steve / the BSC team at work"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 400,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/bsc-about.webp"
+                alt="Steve / the BSC team at work"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
           <div>
             <SectionHeading
@@ -939,9 +972,12 @@ export default function HomePage() {
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src="/assets/logo-ehsl.svg"
                 alt="EHSL UK"
+                width={100}
+                height={33}
+                unoptimized
                 style={{
                   height: 56,
                   width: "auto",
@@ -962,9 +998,11 @@ export default function HomePage() {
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src="/assets/logo-housing-solutions.png"
                 alt="Housing Solutions"
+                width={332}
+                height={142}
                 style={{
                   height: 56,
                   width: "auto",
@@ -985,9 +1023,11 @@ export default function HomePage() {
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src="/assets/logo-sojo.png"
                 alt="Sojo Kitchen"
+                width={750}
+                height={750}
                 style={{
                   height: 56,
                   width: "auto",
@@ -1008,9 +1048,11 @@ export default function HomePage() {
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src="/assets/logo-ics.png"
                 alt="ICS Roofing"
+                width={302}
+                height={229}
                 style={{
                   height: 56,
                   width: "auto",
@@ -1031,9 +1073,11 @@ export default function HomePage() {
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src="/assets/logo-ham.png"
                 alt="HAM"
+                width={1148}
+                height={462}
                 style={{
                   height: 56,
                   width: "auto",
@@ -1120,18 +1164,23 @@ export default function HomePage() {
               background: "var(--paper)",
             }}
           >
-            <img
-              src="/assets/slots/bsc-hardhat.webp"
-              alt="Construction site / hard hat"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 340,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/bsc-hardhat.webp"
+                alt="Construction site / hard hat"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
           <div>
             <span

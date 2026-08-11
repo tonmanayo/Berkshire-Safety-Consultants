@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ds/Button";
 import { Compass, Check, ArrowRight } from "lucide-react";
 
@@ -244,18 +245,23 @@ export default function PrincipalDesignerServicesPage() {
               background: "var(--paper)",
             }}
           >
-            <img
-              src="/assets/slots/pd-hero.webp"
-              alt="Crane / construction project"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 380,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/pd-hero.webp"
+                alt="Crane / construction project"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </div>
       </section>

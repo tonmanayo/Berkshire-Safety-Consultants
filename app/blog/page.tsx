@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Newspaper } from "lucide-react";
 import { Tag } from "@/components/ds/Tag";
+import { blogCollectionLd } from "./posts";
 
 export const metadata = {
   alternates: { canonical: "/blog" },
@@ -96,6 +98,10 @@ const POSTS = [
 export default function BlogPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogCollectionLd()) }}
+      />
       {/* HERO */}
       <section style={{ position: "relative", overflow: "hidden", background: "var(--navy-900)" }}>
         <div
@@ -188,11 +194,15 @@ export default function BlogPage() {
                 boxShadow: "var(--shadow-sm)",
               }}
             >
-              <img
-                src="/assets/blog-iso-9001-vs-45001.png"
-                alt="ISO 9001 vs ISO 45001"
-                style={{ display: "block", width: "100%", height: 340, objectFit: "cover" }}
-              />
+              <div style={{ position: "relative", width: "100%", height: 340 }}>
+                <Image
+                  src="/assets/blog-iso-9001-vs-45001.png"
+                  alt="ISO 9001 vs ISO 45001"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 55vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div
                 style={{
                   padding: 40,
@@ -279,11 +289,15 @@ export default function BlogPage() {
                     boxShadow: "var(--shadow-sm)",
                   }}
                 >
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    style={{ display: "block", width: "100%", height: 190, objectFit: "cover" }}
-                  />
+                  <div style={{ position: "relative", width: "100%", height: 190 }}>
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 33vw"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
                   <div
                     style={{
                       padding: "24px 26px 26px",

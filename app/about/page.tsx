@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ds/Button";
 import { Users, ArrowRight } from "lucide-react";
 
@@ -163,18 +164,23 @@ export default function AboutPage() {
               background: "var(--paper)",
             }}
           >
-            <img
-              src="/assets/slots/about-story.webp"
-              alt="The team / office"
+            <div
               style={{
-                display: "block",
+                position: "relative",
                 width: "100%",
                 height: 380,
                 borderRadius: 16,
                 overflow: "hidden",
-                objectFit: "cover",
               }}
-            />
+            >
+              <Image
+                src="/assets/slots/about-story.webp"
+                alt="The team / office"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -485,17 +491,21 @@ export default function AboutPage() {
                 boxShadow: "var(--shadow-sm)",
               }}
             >
-              <img
-                src="/assets/slots/team-stephen.webp"
-                alt="Stephen Dorrell"
+              <div
                 style={{
-                  display: "block",
+                  position: "relative",
                   width: "100%",
                   height: 260,
-                  objectFit: "cover",
-                  objectPosition: "center 20%",
                 }}
-              />
+              >
+                <Image
+                  src="/assets/slots/team-stephen.png"
+                  alt="Stephen Dorrell"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover", objectPosition: "center 20%" }}
+                />
+              </div>
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
                   style={{
@@ -537,17 +547,21 @@ export default function AboutPage() {
                 boxShadow: "var(--shadow-sm)",
               }}
             >
-              <img
-                src="/assets/slots/team-james.webp"
-                alt="James Dorrell"
+              <div
                 style={{
-                  display: "block",
+                  position: "relative",
                   width: "100%",
                   height: 260,
-                  objectFit: "cover",
-                  objectPosition: "center 20%",
                 }}
-              />
+              >
+                <Image
+                  src="/assets/slots/team-james.webp"
+                  alt="James Dorrell"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover", objectPosition: "center 20%" }}
+                />
+              </div>
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
                   style={{
@@ -588,17 +602,21 @@ export default function AboutPage() {
                 boxShadow: "var(--shadow-sm)",
               }}
             >
-              <img
-                src="/assets/slots/team-ashton.webp"
-                alt="Ashton Mack"
+              <div
                 style={{
-                  display: "block",
+                  position: "relative",
                   width: "100%",
                   height: 260,
-                  objectFit: "cover",
-                  objectPosition: "center 20%",
                 }}
-              />
+              >
+                <Image
+                  src="/assets/slots/team-ashton.webp"
+                  alt="Ashton Mack"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover", objectPosition: "center 20%" }}
+                />
+              </div>
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
                   style={{
@@ -639,17 +657,21 @@ export default function AboutPage() {
                 boxShadow: "var(--shadow-sm)",
               }}
             >
-              <img
-                src="/assets/slots/team-oliver.webp"
-                alt="Oliver Dorrell"
+              <div
                 style={{
-                  display: "block",
+                  position: "relative",
                   width: "100%",
                   height: 260,
-                  objectFit: "cover",
-                  objectPosition: "center 20%",
                 }}
-              />
+              >
+                <Image
+                  src="/assets/slots/team-oliver.webp"
+                  alt="Oliver Dorrell"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover", objectPosition: "center 20%" }}
+                />
+              </div>
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
                   style={{
@@ -690,17 +712,21 @@ export default function AboutPage() {
                 boxShadow: "var(--shadow-sm)",
               }}
             >
-              <img
-                src="/assets/slots/team-karen.webp"
-                alt="Karen Exley"
+              <div
                 style={{
-                  display: "block",
+                  position: "relative",
                   width: "100%",
                   height: 260,
-                  objectFit: "cover",
-                  objectPosition: "center 20%",
                 }}
-              />
+              >
+                <Image
+                  src="/assets/slots/team-karen.webp"
+                  alt="Karen Exley"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{ objectFit: "cover", objectPosition: "center 20%" }}
+                />
+              </div>
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
                   style={{

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
+import { blogPostingLd } from "../posts";
 
 export const metadata = {
   alternates: { canonical: "/blog/winter-site-safety" },
@@ -12,6 +13,12 @@ export const metadata = {
 export default function WinterSiteSafetyPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogPostingLd("winter-site-safety")),
+        }}
+      />
       <section style={{ position: "relative", overflow: "hidden", background: "var(--navy-900)" }}>
         <div
           style={{

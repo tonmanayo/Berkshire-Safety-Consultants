@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import "./responsive.css";
@@ -10,6 +10,8 @@ const SITE_DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: "Berkshire Safety Consultants",
+  robots: { index: true, follow: true },
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   openGraph: {
@@ -29,10 +31,48 @@ export const metadata: Metadata = {
 
 const DS = "/ds";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+// Site-wide structured data (schema.org) for search engines and AI crawlers.
+const STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${SITE_URL}/#org`,
+      name: "Berkshire Safety Consultants",
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      email: "info@berkshiresafetyconsultants.com",
+      areaServed: ["Berkshire", "United Kingdom"],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Maidenhead",
+        addressRegion: "Berkshire",
+        addressCountry: "GB",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Berkshire Safety Consultants",
+      inLanguage: "en-GB",
+    },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
+        />
         <link rel="stylesheet" href={`${DS}/tokens/fonts.css`} />
         <link rel="stylesheet" href={`${DS}/tokens/colors.css`} />
         <link rel="stylesheet" href={`${DS}/tokens/typography.css`} />

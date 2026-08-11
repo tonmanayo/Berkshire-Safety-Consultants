@@ -1,6 +1,7 @@
 import { Shield } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/privacy-policy" },
   title: "Privacy Policy — Berkshire Safety Consultants",
   description:
     "Privacy Policy for Berkshire Safety Consultants Ltd. How we collect, use, and protect your personal data.",

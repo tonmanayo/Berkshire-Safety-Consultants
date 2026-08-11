@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/cultivating-compassion" },
   title:
     "Cultivating compassion and reducing stress in your workplace · Berkshire Safety Consultants",
   description:

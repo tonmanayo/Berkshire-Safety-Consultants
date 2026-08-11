@@ -3,6 +3,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { ArrowRight, HelpCircle } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/faq" },
   title: "FAQ — Berkshire Safety Consultants",
   description:
     "Frequently asked questions about Berkshire Safety Consultants. Expert health and safety consultancy for businesses across Berkshire and the UK.",

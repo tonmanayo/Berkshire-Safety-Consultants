@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/new-fire-safety-laws" },
   title:
     "New fire safety laws 2026: is your resident evacuation strategy legal? · Berkshire Safety Consultants",
   description:

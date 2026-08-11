@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/winter-site-safety" },
   title: "A strategic guide to winter site safety in 2026 · Berkshire Safety Consultants",
   description:
     "Ice, low light, and fatigue create a deadly trio on winter sites — a strategic guide to preventing slips, trips and falls under UK H&S law.",

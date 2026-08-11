@@ -4,6 +4,7 @@ import { Tag } from "@/components/ds/Tag";
 import { ArrowRight, Link as LinkIcon, Check } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/e-learning" },
   title: "Staff E-Learning Packages — Berkshire Safety Consultants",
   description:
     "Three role-specific e-learning packages from the iHASCO course library. Accredited online health and safety training for New Office Staff, Housing Officers, and Maintenance Operatives.",

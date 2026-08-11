@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ds/SectionHeading";
 import { ShieldCheck, ArrowRight, Check, Compass, HardHat, ExternalLink } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/" },
   title: "Berkshire Safety Consultants — Health & Safety Consultancy",
   description:
     "Expert health & safety consultancy for housing associations and small businesses. Practical advice that protects your people, not just box-ticking.",

@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/why-dusty-sites" },
   title: 'Why "dusty" sites are a commercial liability · Berkshire Safety Consultants',
   description:
     "Silica dust is the second biggest killer of construction workers after asbestos — and a dusty site in 2026 is a commercial and regulatory liability.",

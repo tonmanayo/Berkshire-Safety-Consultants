@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/assure" },
   title: "BSC Assure — Compliance Management Platform | Berkshire Safety Consultants",
   description:
     "BSC Assure is the all-in-one compliance management platform for housing associations and SME construction companies. ISO standards, CHAS, Constructionline, policies, and audits in a single system.",

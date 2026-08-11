@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/world-day-for-safety" },
   title: "World Day for Safety and Health at Work · Berkshire Safety Consultants",
   description:
     "On World Day for Safety and Health at Work, we reaffirm our commitment to creating safer workplaces — our approach and how we can help your business.",

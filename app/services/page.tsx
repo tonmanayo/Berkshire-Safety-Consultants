@@ -3,6 +3,7 @@ import { Tag } from "@/components/ds/Tag";
 import { Layers, ArrowRight, Check } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/services" },
   title: "Our Services — Berkshire Safety Consultants",
   description:
     "Practical, tailored health and safety solutions for housing associations, small businesses, principal designer services, and first aid training across Berkshire.",

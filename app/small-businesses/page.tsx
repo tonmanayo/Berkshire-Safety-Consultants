@@ -2,6 +2,7 @@ import { Button } from "@/components/ds/Button";
 import { Store, ArrowRight } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/small-businesses" },
   title: "Small & Medium Businesses — Berkshire Safety Consultants",
   description:
     "Straightforward, cost-effective health and safety solutions for small and medium businesses. General H&S assessments, CHAS accreditation support, workplace risk management, and H&S & HR integration.",

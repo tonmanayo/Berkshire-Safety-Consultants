@@ -2,6 +2,7 @@ import { Button } from "@/components/ds/Button";
 import { Compass, Check, ArrowRight } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/principal-designer-services" },
   title: "Principal Designer Services — Berkshire Safety Consultants",
   description:
     "Expert Principal Designer services under CDM 2015 and the Building Safety Act. We plan, manage, monitor, and coordinate health and safety during the pre-construction phase.",

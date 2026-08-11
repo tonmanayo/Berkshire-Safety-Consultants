@@ -2,6 +2,7 @@ import { Button } from "@/components/ds/Button";
 import { Users, ArrowRight } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/about" },
   title: "About Us — Berkshire Safety Consultants",
   description:
     "Meet the team behind Berkshire Safety Consultants. Our mission is to make health and safety straightforward, allowing you to focus on what matters most: your core business.",

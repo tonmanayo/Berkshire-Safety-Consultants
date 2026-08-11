@@ -3,6 +3,7 @@ import { Newspaper } from "lucide-react";
 import { Tag } from "@/components/ds/Tag";
 
 export const metadata = {
+  alternates: { canonical: "/blog" },
   title: "Blog — Berkshire Safety Consultants",
   description:
     "Practical H&S guidance — Building Safety Act compliance, Principal Designer duties, fire risk assessment, and simple solutions for SMEs.",

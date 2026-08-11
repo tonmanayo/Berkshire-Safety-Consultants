@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/toolbox-talks" },
   title: "Toolbox talks · Berkshire Safety Consultants",
   description:
     "Short, informal toolbox talks are fundamental to building a strong safety culture — how to run them effectively and why they matter.",

@@ -4,6 +4,7 @@ import { Button } from "@/components/ds/Button";
 import { Tag } from "@/components/ds/Tag";
 
 export const metadata = {
+  alternates: { canonical: "/blog/iso-9001-vs-iso-45001" },
   title:
     "ISO 9001 vs ISO 45001 — which does my business actually need? · Berkshire Safety Consultants",
   description:

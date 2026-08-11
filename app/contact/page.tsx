@@ -2,6 +2,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { MessageCircle, MapPin, Phone, Mail, ShieldCheck } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact Us — Berkshire Safety Consultants",
   description:
     "Request a quote, book a free consultation, or ask a question. Berkshire Safety Consultants — Maidenhead, Berkshire. We'll give you a straight answer.",

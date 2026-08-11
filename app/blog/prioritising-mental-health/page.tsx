@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/prioritising-mental-health" },
   title: "Prioritising mental health: a manager's guide · Berkshire Safety Consultants",
   description:
     "Key strategies for managers to prioritise and support mental health within their teams, building a healthier and more resilient workplace.",

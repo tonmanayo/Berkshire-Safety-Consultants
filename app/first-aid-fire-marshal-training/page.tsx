@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/first-aid-fire-marshal-training" },
   title: "First Aid & Fire Marshal Training — Berkshire Safety Consultants",
   description:
     "Accredited First Aid at Work and Fire Marshal training delivered on-site. Delivered in partnership with British Red Cross Training across Berkshire and beyond.",

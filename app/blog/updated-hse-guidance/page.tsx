@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/updated-hse-guidance" },
   title: "Updated HSE guidance on reporting workplace injuries · Berkshire Safety Consultants",
   description:
     "The HSE has updated its RIDDOR guidance — here's what it means for employers and what you need to report.",

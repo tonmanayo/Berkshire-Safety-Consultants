@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Accessibility } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/accessibility-statement" },
   title: "Accessibility Statement — Berkshire Safety Consultants",
   description:
     "Accessibility statement for berkshiresafetyconsultants.com. Our commitment to making this website accessible to everyone, including people with disabilities.",

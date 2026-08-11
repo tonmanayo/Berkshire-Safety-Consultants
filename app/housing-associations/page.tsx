@@ -2,6 +2,7 @@ import { Button } from "@/components/ds/Button";
 import { Building2, ArrowRight } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/housing-associations" },
   title: "Housing Associations — Berkshire Safety Consultants",
   description:
     "Comprehensive health and safety support for housing associations. Fire risk assessments, Building Safety Act guidance, tenant and staff wellbeing, and repairs & maintenance safety.",

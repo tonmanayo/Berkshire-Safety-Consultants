@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ds/Button";
 
 export const metadata = {
+  alternates: { canonical: "/blog/fire-safety-101" },
   title: "Fire safety 101 for homes · Berkshire Safety Consultants",
   description:
     "Simple, practical fire safety steps for homes — reducing risks, installing the right detectors, and planning your escape route.",

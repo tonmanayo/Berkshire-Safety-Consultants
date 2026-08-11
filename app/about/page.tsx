@@ -488,7 +488,13 @@ export default function AboutPage() {
               <img
                 src="/assets/slots/team-stephen.webp"
                 alt="Stephen Dorrell"
-                style={{ display: "block", width: "100%", height: 260, objectFit: "cover" }}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: 260,
+                  objectFit: "cover",
+                  objectPosition: "center 20%",
+                }}
               />
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
@@ -534,7 +540,13 @@ export default function AboutPage() {
               <img
                 src="/assets/slots/team-james.webp"
                 alt="James Dorrell"
-                style={{ display: "block", width: "100%", height: 260, objectFit: "cover" }}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: 260,
+                  objectFit: "cover",
+                  objectPosition: "center 20%",
+                }}
               />
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
@@ -579,7 +591,13 @@ export default function AboutPage() {
               <img
                 src="/assets/slots/team-ashton.webp"
                 alt="Ashton Mack"
-                style={{ display: "block", width: "100%", height: 260, objectFit: "cover" }}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: 260,
+                  objectFit: "cover",
+                  objectPosition: "center 20%",
+                }}
               />
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
@@ -624,7 +642,13 @@ export default function AboutPage() {
               <img
                 src="/assets/slots/team-oliver.webp"
                 alt="Oliver Dorrell"
-                style={{ display: "block", width: "100%", height: 260, objectFit: "cover" }}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: 260,
+                  objectFit: "cover",
+                  objectPosition: "center 20%",
+                }}
               />
               <div style={{ padding: "24px 26px 28px" }}>
                 <div
@@ -669,7 +693,13 @@ export default function AboutPage() {
               <img
                 src="/assets/slots/team-karen.webp"
                 alt="Karen Exley"
-                style={{ display: "block", width: "100%", height: 260, objectFit: "cover" }}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: 260,
+                  objectFit: "cover",
+                  objectPosition: "center 20%",
+                }}
               />
               <div style={{ padding: "24px 26px 28px" }}>
                 <div

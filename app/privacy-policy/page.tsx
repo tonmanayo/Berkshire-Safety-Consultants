@@ -318,6 +318,14 @@ export default function PrivacyPolicyPage() {
             strictly necessary, functionality, and targeting/advertising. You may adjust cookie
             settings via your browser at any time.
           </p>
+          <p>
+            We use Google Analytics to understand how the Website is used so We can improve it.
+            Google Analytics sets analytics cookies and is only loaded{" "}
+            <strong>after you consent</strong> via the cookie banner shown on your first visit. If
+            you decline, or until you accept, no Google Analytics cookies are set and no analytics
+            data is collected. You can change your choice at any time using the “Cookie preferences”
+            link in the footer.
+          </p>
 
           <h2
             style={{

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CookieConsent } from "@/components/CookieConsent";
 import "./responsive.css";
 
 const SITE_URL = "https://www.berkshiresafetyconsultants.com";
@@ -92,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         {children}
         <SiteFooter />
+        <CookieConsent />
       </body>
     </html>
   );

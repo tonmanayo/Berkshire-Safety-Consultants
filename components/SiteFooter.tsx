@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Logo } from "@/components/ds/Logo";
 import { Button } from "@/components/ds/Button";
+import { CookieSettingsLink } from "@/components/CookieSettingsLink";
 
 export function SiteFooter() {
   return (
@@ -268,6 +269,7 @@ export function SiteFooter() {
             >
               Privacy Policy
             </Link>
+            <CookieSettingsLink />
           </div>
           <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
             &copy; 2023 &ndash; 2026 by Troika Digital

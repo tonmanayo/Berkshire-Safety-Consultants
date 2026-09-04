@@ -1,7 +1,7 @@
 # SEO & Discovery — Berkshire Safety Consultants
 
 Site: **https://www.berkshiresafetyconsultants.com** · Stack: Next.js (App Router) on Netlify.
-Status: all items below are merged to `main` and live. One item (Google Analytics) is pending — see the end.
+Status: all items below are merged to `main` and live, including Google Analytics with consent (section 9).
 
 ---
 

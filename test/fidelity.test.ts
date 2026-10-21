@@ -22,6 +22,22 @@
  *      new-fire-safety-laws is the only slug that differs at raw-byte level,
  *      and only in whitespace. Nothing else is normalised: tags, attributes,
  *      URLs and text must match exactly.
+ *
+ *      The HTML-level check above has a known blind spot: collapsing
+ *      `> <` to `><` removes ANY whitespace-only text node sitting directly
+ *      between two tags, including a genuine word-space at an inline-mark
+ *      boundary (e.g. `<strong>world</strong> <em>there</em>` and
+ *      `<strong>world</strong><em>there</em>` both normalise to the same
+ *      string, even though the first renders "world there" and the second
+ *      "worldthere"). Inline-mark boundaries are exactly where this
+ *      migration has already hit one whitespace problem, so this isn't
+ *      hypothetical. To close that hole, the body's plain `textContent`
+ *      (which has no tags for `> <` to match against) is compared
+ *      independently, after collapsing whitespace to single spaces — see
+ *      "body text content matches exactly" below. The two checks are
+ *      deliberately kept separate rather than merged: the HTML check is
+ *      still needed to catch dropped/changed tags, attributes and URLs
+ *      that textContent alone can't see.
  *   2. The <h1> text content, including the lime-highlighted span's text.
  *   3. The CTA's label and href, found inside its own container (the <div>
  *      whose style is `max-width:760px;margin:0 auto;padding:0 24px 84px`)
@@ -74,6 +90,24 @@ function normalisedBodyHtml(html: string): string {
   return collapseWhitespace(stripComments(body.innerHTML)).replace(/> </g, "><");
 }
 
+/**
+ * The article body's plain text, whitespace collapsed to single spaces.
+ * Independent safety net for normalisedBodyHtml's `> <` -> `><` collapse,
+ * which can mask a real word-space at an inline-mark boundary (see the
+ * module docstring). textContent has no tags, so there is nothing for that
+ * collapse to match against — a missing word-space here simply glues two
+ * words together, which this catches.
+ */
+function normalisedBodyText(html: string): string {
+  const root = parse(html);
+  const body = findArticleBody(root);
+  if (!body)
+    throw new Error(
+      "article body container not found (no div with max-width:760px + line-height:1.75)",
+    );
+  return collapseWhitespace(body.textContent);
+}
+
 function heroText(html: string): { title: string; cta: string } {
   const root = parse(html);
   const h1 = root.querySelector("h1");
@@ -121,6 +155,12 @@ describe("migrated posts match their baseline", () => {
     it(`${slug}: body matches after comment/whitespace normalisation`, () => {
       const built = normalisedBodyHtml(readBuilt(slug));
       const baseline = normalisedBodyHtml(readBaseline(slug));
+      expect(built).toBe(baseline);
+    });
+
+    it(`${slug}: body text content matches exactly`, () => {
+      const built = normalisedBodyText(readBuilt(slug));
+      const baseline = normalisedBodyText(readBaseline(slug));
       expect(built).toBe(baseline);
     });
 

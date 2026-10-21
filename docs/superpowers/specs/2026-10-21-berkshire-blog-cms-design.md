@@ -52,6 +52,11 @@ existing body exactly.
   ("Fire marshal training"), and `prioritising-mental-health` points at
   `/e-learning` ("Explore e-learning packages"). Pointing an article at the
   service it discusses is an editorial feature, so it becomes authored fields.
+- **Two description texts, not one.** Found during planning: today's card text
+  and today's `<meta name="description">` differ on 9 of the 10 posts, so the
+  schema carries both (`excerpt` and `seoDescription`), mirroring the Meechan
+  letter schema. Collapsing them to one field would silently rewrite either
+  every card or every meta description.
 - **Featured flag.** Only `iso-9001-vs-iso-45001` carries the lime "Featured" tag,
   which also shifts the `h1` margin to `18px 0 20px`. Both the index and the
   article read it.
@@ -150,7 +155,13 @@ dependency, confined to `/studio`), `tsx` (migration script).
   article, covered by `components/__tests__/schema.test.ts`. `BLOG_POSTS` is
   removed; `blogPostingLd` and `blogCollectionLd` become functions over fetched
   data, and the existing tests are rewritten against that.
-- **`app/(site)/blog/page.tsx`** (today `app/blog/page.tsx`) fetches from Sanity instead of importing `BLOG_POSTS`.
+- **`app/(site)/blog/page.tsx`** (today `app/blog/page.tsx`) fetches from Sanity
+  instead of importing `BLOG_POSTS`. Note it currently holds a _second_
+  hardcoded `POSTS` array plus a hardcoded featured article — a third source of
+  truth that the migration removes. Its card titles are Title Case while the
+  articles are sentence case; after cutover the Sanity `title` is canonical, so
+  index cards and JSON-LD headlines adopt the article's sentence case. This is
+  an accepted, visible change on `/blog`.
 
 ## Testing
 

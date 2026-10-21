@@ -38,13 +38,10 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { parse, type HTMLElement } from "node-html-parser";
+import { findArticleBody, collapseWhitespace } from "../lib/blog/compare-html";
 
 const BUILD_DIR = join(".next", "server", "app", "blog");
 const BASELINE_DIR = join("test", "fixtures", "blog-baseline");
-
-function collapseWhitespace(s: string): string {
-  return s.replace(/\s+/g, " ").trim();
-}
 
 // The opengraph-image route lives inside the (site) route group, so Next
 // appends a deterministic disambiguation suffix (see
@@ -53,16 +50,6 @@ function collapseWhitespace(s: string): string {
 // before comparing so an unrelated regression isn't masked by it either.
 function normalizeOpengraphSuffix(s: string): string {
   return s.replace(/\/opengraph-image-[a-z0-9]+/g, "/opengraph-image");
-}
-
-function findArticleBody(root: HTMLElement): HTMLElement | null {
-  for (const div of root.querySelectorAll("div")) {
-    const style = div.getAttribute("style") ?? "";
-    if (style.includes("max-width:760px") && style.includes("line-height:1.75")) {
-      return div;
-    }
-  }
-  return null;
 }
 
 function canonicalTag(el: HTMLElement): string {

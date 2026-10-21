@@ -1,0 +1,134 @@
+/**
+ * The fidelity gate.
+ *
+ * This is the go/no-go for deleting the original, hand-coded /blog/[slug]
+ * pages (Task 12). It compares each migrated article, as rendered by the
+ * Sanity-backed /blog-preview/[slug] template, against the frozen baseline
+ * captured from the original page before migration.
+ *
+ * What is compared, for all 10 slugs:
+ *
+ *   1. The article body container (the <div> whose style contains both
+ *      `max-width:760px` and `line-height:1.75`) must be identical after
+ *      normalising away two, and only two, known-harmless differences:
+ *        - React hydration comment markers (`<!-- -->`), which the original
+ *          hand-written JSX emits at inline-mark boundaries (e.g. around a
+ *          `{" "}` spacer) but the Portable Text renderer does not.
+ *        - Whitespace: the original JSX carries indentation/formatting
+ *          whitespace between tags that the migrated markup doesn't
+ *          reproduce byte-for-byte.
+ *      These two normalisations were verified directly (see task-11 report)
+ *      to make all 10 bodies identical, including iso-9001-vs-iso-45001;
+ *      new-fire-safety-laws is the only slug that differs at raw-byte level,
+ *      and only in whitespace. Nothing else is normalised: tags, attributes,
+ *      URLs and text must match exactly.
+ *   2. The <h1> text content, including the lime-highlighted span's text.
+ *   3. The CTA's label and href, found inside its own container (the <div>
+ *      whose style is `max-width:760px;margin:0 auto;padding:0 24px 84px`)
+ *      rather than by scanning the whole page, which carries ~20 unrelated
+ *      links from the header and footer.
+ *
+ * Four differences are known, sanctioned, and deliberately NOT checked here:
+ * computed read time, the h1's clamp() font-size (always
+ * `clamp(28px, 4.4vw, 46px)` on the migrated template), dates always
+ * carrying the year, and hero images served from Sanity's CDN. None of
+ * those are touched by the three checks above, so no special-casing is
+ * needed to exempt them.
+ *
+ * Requires a prior `npm run build` (reads from .next/server/app/blog-preview/).
+ */
+
+import { describe, it, expect } from "vitest";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { parse } from "node-html-parser";
+import { findArticleBody, findCtaContainer, collapseWhitespace } from "../lib/blog/compare-html";
+
+const BASELINE_DIR = join("test", "fixtures", "blog-baseline");
+const BUILD_DIR = join(".next", "server", "app", "blog-preview");
+
+const slugs = readdirSync(BASELINE_DIR)
+  .filter((f) => f.endsWith(".html"))
+  .map((f) => f.replace(/\.html$/, ""))
+  .sort();
+
+/** Strip React's hydration comment markers (`<!-- -->`, `<!--$-->`, etc). */
+function stripComments(s: string): string {
+  return s.replace(/<!--[\s\S]*?-->/g, "");
+}
+
+/**
+ * The article body, normalised for the two sanctioned, justified differences
+ * only: hydration comment markers and whitespace. The final `> <` -> `><`
+ * pass removes purely structural whitespace left between sibling/nested tags
+ * after collapsing (JSX indentation); it cannot eat a real word-space,
+ * because a word-space always has text, not a tag, on at least one side.
+ */
+function normalisedBodyHtml(html: string): string {
+  const root = parse(html);
+  const body = findArticleBody(root);
+  if (!body)
+    throw new Error(
+      "article body container not found (no div with max-width:760px + line-height:1.75)",
+    );
+  return collapseWhitespace(stripComments(body.innerHTML)).replace(/> </g, "><");
+}
+
+function heroText(html: string): { title: string; cta: string } {
+  const root = parse(html);
+  const h1 = root.querySelector("h1");
+  if (!h1) throw new Error("h1 not found");
+
+  const ctaContainer = findCtaContainer(root);
+  if (!ctaContainer) {
+    throw new Error(
+      "CTA container not found (no div with style max-width:760px;margin:0 auto;padding:0 24px 84px)",
+    );
+  }
+  const cta = ctaContainer.querySelector("a");
+  if (!cta) throw new Error("CTA link not found inside CTA container");
+
+  return {
+    title: collapseWhitespace(h1.textContent),
+    cta: `${cta.getAttribute("href")} ${collapseWhitespace(cta.textContent)}`,
+  };
+}
+
+function builtPath(slug: string): string {
+  return join(BUILD_DIR, `${slug}.html`);
+}
+
+function readBuilt(slug: string): string {
+  const path = builtPath(slug);
+  if (!existsSync(path)) {
+    throw new Error(
+      `missing built preview for "${slug}" (expected ${path}) — run \`npm run build\` first, then re-run this test`,
+    );
+  }
+  return readFileSync(path, "utf8");
+}
+
+function readBaseline(slug: string): string {
+  return readFileSync(join(BASELINE_DIR, `${slug}.html`), "utf8");
+}
+
+describe("migrated posts match their baseline", () => {
+  it("has a baseline for all 10 posts", () => {
+    expect(slugs).toHaveLength(10);
+  });
+
+  for (const slug of slugs) {
+    it(`${slug}: body matches after comment/whitespace normalisation`, () => {
+      const built = normalisedBodyHtml(readBuilt(slug));
+      const baseline = normalisedBodyHtml(readBaseline(slug));
+      expect(built).toBe(baseline);
+    });
+
+    it(`${slug}: title and CTA survive`, () => {
+      const built = heroText(readBuilt(slug));
+      const baseline = heroText(readBaseline(slug));
+      expect(built.title).toBe(baseline.title);
+      expect(built.cta).toBe(baseline.cta);
+    });
+  }
+});

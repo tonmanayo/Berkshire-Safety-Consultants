@@ -45,4 +45,29 @@ describe("htmlToPortableText", () => {
   it("ignores empty paragraphs", () => {
     expect(htmlToPortableText("<p>   </p><p>real</p>")).toHaveLength(1);
   });
+
+  it("throws on an unsupported top-level tag", () => {
+    expect(() => htmlToPortableText("<blockquote>Quoted text</blockquote>")).toThrow(/blockquote/);
+  });
+
+  it("throws on an <img> nested inside a paragraph instead of silently dropping it", () => {
+    expect(() => htmlToPortableText('<p>Before <img src="x.jpg"> after</p>')).toThrow(/img/);
+  });
+
+  it("throws on an unmapped named entity instead of leaking raw text", () => {
+    expect(() => htmlToPortableText("<p>one&hellip;two</p>")).toThrow(/hellip/);
+  });
+
+  it("decodes numeric entities generically", () => {
+    const blocks = htmlToPortableText("<p>it&#8217;s</p>");
+    expect(blocks[0].children[0].text).toBe("it’s");
+  });
+
+  it("accumulates marks for nested strong/em", () => {
+    const blocks = htmlToPortableText("<p><strong><em>x</em></strong></p>");
+    const spans = blocks[0].children;
+    expect(spans).toHaveLength(1);
+    expect(spans[0].text).toBe("x");
+    expect(spans[0].marks).toEqual(["strong", "em"]);
+  });
 });

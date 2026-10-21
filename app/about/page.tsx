@@ -555,61 +555,6 @@ export default function AboutPage() {
                 }}
               >
                 <Image
-                  src="/assets/slots/team-james.webp"
-                  alt="James Dorrell"
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  style={{ objectFit: "cover", objectPosition: "center 20%" }}
-                />
-              </div>
-              <div style={{ padding: "24px 26px 28px" }}>
-                <div
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "var(--accent-on-light)",
-                    marginBottom: 6,
-                  }}
-                >
-                  Civil Engineer &amp; Chartered Accountant
-                </div>
-                <h3
-                  style={{
-                    margin: "0 0 10px",
-                    fontSize: 20,
-                    fontWeight: 700,
-                    color: "var(--navy-900)",
-                  }}
-                >
-                  James Dorrell
-                </h3>
-                <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "var(--gray-700)" }}>
-                  A blend of technical engineering insight and financial governance, helping clients
-                  translate risk into practical controls, robust programmes, and defensible
-                  compliance across construction, repairs, and multi-site operations.
-                </p>
-              </div>
-            </article>
-
-            <article
-              style={{
-                background: "var(--paper)",
-                border: "1px solid var(--mist)",
-                borderRadius: 18,
-                overflow: "hidden",
-                boxShadow: "var(--shadow-sm)",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  height: 260,
-                }}
-              >
-                <Image
                   src="/assets/slots/team-ashton.webp"
                   alt="Ashton Mack"
                   fill
@@ -644,61 +589,6 @@ export default function AboutPage() {
                   Digital Strategy Lead and Marketing Specialist, translating complex compliance and
                   safety objectives into high-impact, data-driven digital strategies — managing the
                   full digital footprint so campaigns stay cohesive and brand-aligned.
-                </p>
-              </div>
-            </article>
-
-            <article
-              style={{
-                background: "var(--paper)",
-                border: "1px solid var(--mist)",
-                borderRadius: 18,
-                overflow: "hidden",
-                boxShadow: "var(--shadow-sm)",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  height: 260,
-                }}
-              >
-                <Image
-                  src="/assets/slots/team-oliver.webp"
-                  alt="Oliver Dorrell"
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  style={{ objectFit: "cover", objectPosition: "center 20%" }}
-                />
-              </div>
-              <div style={{ padding: "24px 26px 28px" }}>
-                <div
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "var(--accent-on-light)",
-                    marginBottom: 6,
-                  }}
-                >
-                  Surveyor / Fire Risk Assessor
-                </div>
-                <h3
-                  style={{
-                    margin: "0 0 10px",
-                    fontSize: 20,
-                    fontWeight: 700,
-                    color: "var(--navy-900)",
-                  }}
-                >
-                  Oliver Dorrell
-                </h3>
-                <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "var(--gray-700)" }}>
-                  Studying for his Building Surveyor qualifications and working alongside fire risk
-                  professionals since 2020, with experience in construction as well as Fire Risk
-                  Assessment work.
                 </p>
               </div>
             </article>

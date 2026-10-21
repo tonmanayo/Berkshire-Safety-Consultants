@@ -13,6 +13,7 @@
     "test": "vitest run",
     "snapshot:blog": "tsx scripts/snapshot-blog.ts",
     "verify:baseline": "tsx scripts/verify-baseline.ts",
+    "migrate:posts": "tsx --env-file=.env.local scripts/migrate-posts.ts",
     "prepare": "husky"
   },
   "dependencies": {

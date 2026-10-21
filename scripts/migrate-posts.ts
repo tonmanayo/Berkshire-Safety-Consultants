@@ -215,7 +215,27 @@ async function main(): Promise<void> {
 
   for (const doc of docs) {
     const { heroPath, ...rest } = doc;
-    const asset = await client.assets.upload("image", readFileSync(join("public", heroPath)), {
+    const fullHeroPath = join("public", heroPath);
+    let heroFile: Buffer;
+    try {
+      heroFile = readFileSync(fullHeroPath);
+    } catch (err) {
+      throw new Error(
+        `${doc.slug.current}: could not read hero image at ${fullHeroPath}: ${
+          err instanceof Error ? err.message : err
+        }`,
+      );
+    }
+
+    // Sanity asset IDs are derived from the file's content hash, so
+    // re-running this script against an unchanged image resolves to the
+    // SAME asset (no duplicate upload, no extra storage) — safe to re-run.
+    // If the image file at this path is ever edited before a re-run, the
+    // new content hashes to a NEW asset, createOrReplace repoints the post
+    // at it, and the previous asset is left orphaned in the dataset with no
+    // automatic cleanup. This script does not delete assets; an orphaned
+    // asset must be removed manually in sanity.io/manage if that happens.
+    const asset = await client.assets.upload("image", heroFile, {
       filename: heroPath.split("/").pop(),
     });
 
@@ -229,7 +249,7 @@ async function main(): Promise<void> {
     });
 
     console.log(
-      `migrated: ${doc.slug.current} (${doc.body.length} blocks, featured=${doc.featured}, cta=${doc.ctaHref})`,
+      `migrated: ${doc.slug.current} (${doc.body.length} blocks, featured=${doc.featured}, cta=${doc.ctaHref}, asset=${asset._id})`,
     );
   }
 

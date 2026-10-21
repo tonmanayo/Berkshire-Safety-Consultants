@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getPostSlugs } from "@/lib/sanity/queries";
 
 const BASE_URL = "https://www.berkshiresafetyconsultants.com";
 
@@ -8,7 +9,8 @@ type Entry = {
   priority: number;
 };
 
-// Every public route on the site. Keep in sync when pages are added or removed.
+// Every public static route on the site. Keep in sync when pages are added or
+// removed. Blog post entries are appended dynamically from Sanity below.
 const ENTRIES: Entry[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
@@ -22,26 +24,26 @@ const ENTRIES: Entry[] = [
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/faq", changeFrequency: "monthly", priority: 0.6 },
   { path: "/blog", changeFrequency: "weekly", priority: 0.7 },
-  { path: "/blog/new-fire-safety-laws", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/why-dusty-sites", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/winter-site-safety", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/iso-9001-vs-iso-45001", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/updated-hse-guidance", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/toolbox-talks", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/prioritising-mental-health", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/cultivating-compassion", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/world-day-for-safety", changeFrequency: "yearly", priority: 0.5 },
-  { path: "/blog/fire-safety-101", changeFrequency: "yearly", priority: 0.5 },
   { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/accessibility-statement", changeFrequency: "yearly", priority: 0.3 },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
-  return ENTRIES.map(({ path, changeFrequency, priority }) => ({
+  const staticEntries = ENTRIES.map(({ path, changeFrequency, priority }) => ({
     url: `${BASE_URL}${path === "/" ? "" : path}`,
     lastModified,
     changeFrequency,
     priority,
   }));
+
+  const slugs = await getPostSlugs();
+  const blogEntries = slugs.map((slug) => ({
+    url: `${BASE_URL}/blog/${slug}`,
+    lastModified,
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+  }));
+
+  return [...staticEntries, ...blogEntries];
 }

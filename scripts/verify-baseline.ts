@@ -25,12 +25,38 @@
  *       since that path change is a sanctioned, deliberate delta (see
  *       task-4 report, round 3).
  *   (C) Structured data — every `<script type="application/ld+json">`
- *       block, JSON.parsed, deep-compared to the baseline's.
+ *       block, JSON.parsed, deep-compared to the baseline's, after
+ *       normalizing each BlogPosting's `image` and `headline` (see below).
  *
  * Explicitly OUT of scope (known, accepted deltas from splitting the app
  * into (site)/(studio) route groups): build ID, chunk filenames/hashes,
  * RSC reference-ID numbering, the extra shared preload <script>, and the
  * doubled not-found fallback serialization. None of these affect A, B, or C.
+ *
+ * Also out of scope (Task 12, the Sanity cutover):
+ *   - `image`: the hand-written articles' BlogPosting `image` pointed at a
+ *     local `/assets/blog-*.png` file; the Sanity-backed articles point at
+ *     the equivalent hero image served from Sanity's CDN (cdn.sanity.io)
+ *     instead. Same sanctioned, content-identical delta already called out
+ *     in test/fidelity.test.ts ("hero images served from Sanity's CDN"),
+ *     just also visible inside structured data.
+ *   - `headline`: before this migration, a post's <h1> text and its
+ *     BlogPosting headline/index-card title came from two independently
+ *     hand-maintained strings (the page's own JSX vs `BLOG_POSTS` in
+ *     app/(site)/blog/posts.ts) that had drifted apart — not just casing
+ *     ("Toolbox Talks" vs "Toolbox talks") but, for 3 of the 10 posts,
+ *     wording/punctuation (e.g. "New Fire Safety Laws 2026: Is Your
+ *     Evacuation Strategy Legal?" vs the <h1>'s "New fire safety laws 2026:
+ *     is your resident evacuation strategy legal?"). Sanity's `title` was
+ *     migrated from the <h1> (see scripts/migrate-posts.ts) and is now the
+ *     single source of truth for both, per Task 12's brief ("the index's
+ *     card titles are currently Title Case ... After cutover the Sanity
+ *     `title` is canonical"). So the headline is expected to change,
+ *     sometimes by more than case, and that is sanctioned.
+ *
+ * Both fields' values are normalized to a constant placeholder before
+ * comparison so these two expected deltas can't mask a real regression
+ * (e.g. either field going missing, or a post picking up the wrong value).
  *
  * Requires a prior `npm run build` (reads from .next/server/app/blog/).
  */
@@ -76,10 +102,35 @@ function headMetaAndLinkTags(root: HTMLElement): string[] {
     .map((el) => normalizeOpengraphSuffix(canonicalTag(el)));
 }
 
+// Sanctioned Task-12 deltas inside structured data, normalized to a constant
+// placeholder before comparing (see module docstring for why each is safe):
+//   - `image`: local /assets path -> Sanity CDN URL.
+//   - `headline`: the page's own <h1> is now the single source of truth,
+//     superseding the separately hand-maintained (and, for 3/10 posts,
+//     drifted) BLOG_POSTS title.
+const SANCTIONED_LD_FIELDS: Record<string, string> = {
+  image: "HERO_IMAGE",
+  headline: "ARTICLE_HEADLINE",
+};
+
+function normalizeSanctionedFields(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(normalizeSanctionedFields);
+  if (value && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [key, val] of Object.entries(value)) {
+      const placeholder = SANCTIONED_LD_FIELDS[key];
+      out[key] =
+        placeholder && typeof val === "string" ? placeholder : normalizeSanctionedFields(val);
+    }
+    return out;
+  }
+  return value;
+}
+
 function structuredData(root: HTMLElement): unknown[] {
   return root
     .querySelectorAll('script[type="application/ld+json"]')
-    .map((el) => JSON.parse(el.textContent));
+    .map((el) => normalizeSanctionedFields(JSON.parse(el.textContent)));
 }
 
 type CheckResult = { label: string; pass: boolean; detail?: string };

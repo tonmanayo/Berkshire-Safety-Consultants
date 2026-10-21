@@ -1,10 +1,11 @@
 /**
  * The fidelity gate.
  *
- * This is the go/no-go for deleting the original, hand-coded /blog/[slug]
+ * This was the go/no-go for deleting the original, hand-coded /blog/[slug]
  * pages (Task 12). It compares each migrated article, as rendered by the
- * Sanity-backed /blog-preview/[slug] template, against the frozen baseline
- * captured from the original page before migration.
+ * Sanity-backed /blog/[slug] template (now the real route, post-cutover),
+ * against the frozen baseline captured from the original page before
+ * migration.
  *
  * What is compared, for all 10 slugs:
  *
@@ -51,7 +52,7 @@
  * those are touched by the three checks above, so no special-casing is
  * needed to exempt them.
  *
- * Requires a prior `npm run build` (reads from .next/server/app/blog-preview/).
+ * Requires a prior `npm run build` (reads from .next/server/app/blog/).
  */
 
 import { describe, it, expect } from "vitest";
@@ -61,7 +62,7 @@ import { parse } from "node-html-parser";
 import { findArticleBody, findCtaContainer, collapseWhitespace } from "../lib/blog/compare-html";
 
 const BASELINE_DIR = join("test", "fixtures", "blog-baseline");
-const BUILD_DIR = join(".next", "server", "app", "blog-preview");
+const BUILD_DIR = join(".next", "server", "app", "blog");
 
 const slugs = readdirSync(BASELINE_DIR)
   .filter((f) => f.endsWith(".html"))

@@ -80,18 +80,19 @@ existing body exactly.
 
 One `post` document type:
 
-| Field         | Type                             | Notes                                                                        |
-| ------------- | -------------------------------- | ---------------------------------------------------------------------------- |
-| `title`       | string, required                 | Full plain title. Drives SEO, index cards and JSON-LD                        |
-| `highlight`   | string                           | Phrase within the title rendered lime. No match → plain title                |
-| `slug`        | slug, required                   | Sourced from title. The 10 existing slugs are preserved exactly              |
-| `heroImage`   | image (hotspot) + required `alt` | Existing `/public/assets/blog-*.png` uploaded to Sanity's CDN                |
-| `description` | text, required                   | Index card copy and meta description                                         |
-| `publishedAt` | datetime, required               | Ordering and the displayed date                                              |
-| `featured`    | boolean                          | Drives the lime "Featured" tag                                               |
-| `ctaLabel`    | string                           | Defaults to "Get in touch" when blank                                        |
-| `ctaHref`     | string                           | Defaults to `/contact` when blank                                            |
-| `body`        | Portable Text, required          | Blocks: `normal`, `h2`. Lists: bullet, number. Marks: `strong`, `em`, `link` |
+| Field            | Type                             | Notes                                                                        |
+| ---------------- | -------------------------------- | ---------------------------------------------------------------------------- |
+| `title`          | string, required                 | Full plain title. Drives SEO, index cards and JSON-LD                        |
+| `highlight`      | string                           | Phrase within the title rendered lime. No match → plain title                |
+| `slug`           | slug, required                   | Sourced from title. The 10 existing slugs are preserved exactly              |
+| `heroImage`      | image (hotspot) + required `alt` | Existing `/public/assets/blog-*.png` uploaded to Sanity's CDN                |
+| `excerpt`        | text, required                   | Index card copy and structured-data description                              |
+| `seoDescription` | text                             | The `<meta name="description">`. Falls back to `excerpt` when blank          |
+| `publishedAt`    | datetime, required               | Ordering and the displayed date                                              |
+| `featured`       | boolean                          | Drives the lime "Featured" tag                                               |
+| `ctaLabel`       | string                           | Defaults to "Get in touch" when blank                                        |
+| `ctaHref`        | string                           | Defaults to `/contact` when blank                                            |
+| `body`           | Portable Text, required          | Blocks: `normal`, `h2`. Lists: bullet, number. Marks: `strong`, `em`, `link` |
 
 `link` is included in the mark set even though no current post uses one — it costs
 nothing and an editor will reach for it.
@@ -113,7 +114,8 @@ The gate:
 1. Snapshot the rendered HTML of all 10 posts before migration.
 2. Convert → Portable Text → render through the new `/blog/[slug]` template.
 3. Normalise whitespace and diff the **full rendered page**, hero included. **Target:
-   byte-identical output for all 10, except the four deltas below.**
+   identical output for all 10 (after collapsing the whitespace JSX formatting
+   introduces), except the four deltas below.**
 
 Accepted differences, and nothing else: computed read time, normalised title size,
 always-show-year dates, and hero images served from Sanity's CDN rather than
@@ -214,7 +216,7 @@ The existing pages stay live throughout:
 
 - Berkshire can log in at `/studio`, write a post, publish, and see it live within
   ~10 seconds without a rebuild.
-- All 10 migrated posts render byte-identically apart from the four accepted
-  differences, at their existing URLs.
+- All 10 migrated posts render identically — after whitespace normalisation —
+  apart from the four accepted differences, at their existing URLs.
 - Sitemap and JSON-LD cover Sanity-authored posts automatically.
 - Lint, typecheck and tests pass; no `styled-components` outside `/studio`.

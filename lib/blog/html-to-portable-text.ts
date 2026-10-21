@@ -78,6 +78,23 @@ function unsupportedTagError(tag: string, el: HTMLElement): Error {
   );
 }
 
+/**
+ * A non-whitespace top-level text node — one not wrapped in any of
+ * TOP_LEVEL_TAGS — found directly in the article body. This is the one
+ * remaining silent-drop path after the whitelist hardening above; it must
+ * throw naming the offending content rather than quietly losing it.
+ * Whitespace-only text nodes (the formatting indentation between sibling
+ * block tags) are not an error — the caller skips those before reaching
+ * this.
+ */
+function unsupportedTopLevelTextError(node: Node): Error {
+  const text = clean(node.rawText ?? "").trim();
+  return new Error(
+    `htmlToPortableText: unsupported top-level text content, not inside a ` +
+      `<p>, <h2>, <ul>, or <ol>: "${text.slice(0, 80)}"`,
+  );
+}
+
 /** Walks inline nodes, carrying marks down to the spans they apply to. */
 function spansOf(node: Node, marks: string[] = []): Span[] {
   const spans: Span[] = [];
@@ -130,7 +147,10 @@ export function htmlToPortableText(html: string): PortableTextBlock[] {
   for (const node of root.childNodes) {
     const el = node as HTMLElement;
     const tag = el.tagName?.toLowerCase();
-    if (!tag) continue;
+    if (!tag) {
+      if (!(node.rawText ?? "").trim()) continue;
+      throw unsupportedTopLevelTextError(node);
+    }
 
     if (!TOP_LEVEL_TAGS.has(tag)) throw unsupportedTagError(tag, el);
 

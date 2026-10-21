@@ -2,9 +2,9 @@
  * Shared landmarks for diffing rendered blog article HTML against a frozen
  * baseline.
  *
- * Both scripts/verify-baseline.ts (which diffs the original, hand-coded
+ * Both scripts/verify-baseline.ts (which diffs the Sanity-rendered
  * /blog/[slug] pages against their frozen baseline) and test/fidelity.test.ts
- * (which diffs the Sanity-rendered /blog-preview/[slug] pages against the
+ * (which diffs those same Sanity-rendered /blog/[slug] pages against the
  * same baseline) need to agree on exactly what counts as "the article body"
  * and "the call-to-action". Two subtly different definitions of either would
  * be a real hazard — a regression caught by one comparison but silently

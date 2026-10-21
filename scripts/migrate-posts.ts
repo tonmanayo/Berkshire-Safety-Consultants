@@ -169,6 +169,7 @@ function printDryPassTable(docs: MigratedDoc[]): void {
 
 async function main(): Promise<void> {
   const slugs = readdirSync(BASELINE_DIR)
+    .filter((f) => f.endsWith(".html"))
     .map((f) => f.replace(/\.html$/, ""))
     .sort();
 

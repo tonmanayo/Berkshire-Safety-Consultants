@@ -50,6 +50,15 @@ describe("htmlToPortableText", () => {
     expect(() => htmlToPortableText("<blockquote>Quoted text</blockquote>")).toThrow(/blockquote/);
   });
 
+  it("throws on top-level text content not wrapped in a block tag, instead of silently dropping it", () => {
+    expect(() => htmlToPortableText("<p>One</p>Stray text<p>Two</p>")).toThrow(/Stray text/);
+  });
+
+  it("ignores whitespace-only top-level text between block tags", () => {
+    const blocks = htmlToPortableText("<p>One</p>\n  <p>Two</p>");
+    expect(blocks).toHaveLength(2);
+  });
+
   it("throws on an <img> nested inside a paragraph instead of silently dropping it", () => {
     expect(() => htmlToPortableText('<p>Before <img src="x.jpg"> after</p>')).toThrow(/img/);
   });

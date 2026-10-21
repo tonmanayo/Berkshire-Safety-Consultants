@@ -24,16 +24,42 @@
  *       route-group suffix normalized back to `/opengraph-image` first,
  *       since that path change is a sanctioned, deliberate delta (see
  *       task-4 report, round 3).
- *   (C) Structured data — every `<script type="application/ld+json">`
- *       block, JSON.parsed, deep-compared to the baseline's, after
- *       normalizing each BlogPosting's `image` and `headline` (see below).
+ *   (C) Structured data — every `<script type="application/ld+json">` block,
+ *       JSON.parsed, deep-compared to the baseline's, EXCEPT for two fields
+ *       inside BlogPosting objects — `image` and `headline` — which are
+ *       known to legitimately differ from the baseline after the Sanity
+ *       cutover (see below). Those two are excluded from the deep-equal
+ *       (normalized to a constant placeholder on both sides) and instead
+ *       each gets its own targeted, content-verifying assertion:
+ *         - C2: every `headline` found in the current page's structured data
+ *           equals that same page's own <h1> text (whitespace-collapsed).
+ *           This is the real invariant post-cutover — the <h1> is the single
+ *           source of truth, so structured data must agree with what the
+ *           reader sees — and it still fails on a missing, empty, or
+ *           wrong/swapped headline. (test/fidelity.test.ts separately pins
+ *           each baseline's <h1> text, so between the two, both "does the
+ *           <h1> match the original" and "does the JSON-LD match the <h1>"
+ *           are checked.)
+ *         - C3: every `image` found in the current page's structured data is
+ *           a non-empty, absolute `https://cdn.sanity.io/...` URL. This
+ *           still fails on a missing, empty, relative, or wrong-host value.
+ *       A placeholder swap alone (the previous version of this script) does
+ *       NOT provide this: it would accept a `headline` equal to the WRONG
+ *       post's title, or an empty string, or any `image` value at all,
+ *       because any string normalizes to the same placeholder on both sides
+ *       regardless of content. C2/C3 close that hole; C (the placeholder
+ *       deep-equal) still protects every other field (`@id`,
+ *       `mainEntityOfPage`, `description`, `datePublished`, `author`,
+ *       `publisher`, `isPartOf`, the Organization/WebSite graph, etc.)
+ *       byte-for-byte.
  *
  * Explicitly OUT of scope (known, accepted deltas from splitting the app
  * into (site)/(studio) route groups): build ID, chunk filenames/hashes,
  * RSC reference-ID numbering, the extra shared preload <script>, and the
  * doubled not-found fallback serialization. None of these affect A, B, or C.
  *
- * Also out of scope (Task 12, the Sanity cutover):
+ * Why `image` and `headline` are expected to differ from the baseline
+ * (Task 12, the Sanity cutover):
  *   - `image`: the hand-written articles' BlogPosting `image` pointed at a
  *     local `/assets/blog-*.png` file; the Sanity-backed articles point at
  *     the equivalent hero image served from Sanity's CDN (cdn.sanity.io)
@@ -51,12 +77,9 @@
  *     migrated from the <h1> (see scripts/migrate-posts.ts) and is now the
  *     single source of truth for both, per Task 12's brief ("the index's
  *     card titles are currently Title Case ... After cutover the Sanity
- *     `title` is canonical"). So the headline is expected to change,
- *     sometimes by more than case, and that is sanctioned.
- *
- * Both fields' values are normalized to a constant placeholder before
- * comparison so these two expected deltas can't mask a real regression
- * (e.g. either field going missing, or a post picking up the wrong value).
+ *     `title` is canonical"). So the headline is expected to change versus
+ *     the frozen baseline, sometimes by more than case — but it must still
+ *     agree with the current page's own <h1>, which is what C2 checks.
  *
  * Requires a prior `npm run build` (reads from .next/server/app/blog/).
  */
@@ -102,12 +125,13 @@ function headMetaAndLinkTags(root: HTMLElement): string[] {
     .map((el) => normalizeOpengraphSuffix(canonicalTag(el)));
 }
 
-// Sanctioned Task-12 deltas inside structured data, normalized to a constant
-// placeholder before comparing (see module docstring for why each is safe):
-//   - `image`: local /assets path -> Sanity CDN URL.
-//   - `headline`: the page's own <h1> is now the single source of truth,
-//     superseding the separately hand-maintained (and, for 3/10 posts,
-//     drifted) BLOG_POSTS title.
+// `image` and `headline` are excluded from the (C) deep-equal below because
+// they're expected to differ from the baseline post-cutover (see module
+// docstring). They are NOT left unchecked: C2 and C3 (in verifySlug) assert
+// their actual content directly, which this placeholder swap alone cannot
+// do — any string collapses to the same placeholder on both sides
+// regardless of value, so by itself this would silently accept a wrong,
+// swapped, or empty `headline`/`image`.
 const SANCTIONED_LD_FIELDS: Record<string, string> = {
   image: "HERO_IMAGE",
   headline: "ARTICLE_HEADLINE",
@@ -127,11 +151,27 @@ function normalizeSanctionedFields(value: unknown): unknown {
   return value;
 }
 
-function structuredData(root: HTMLElement): unknown[] {
+function parseStructuredData(root: HTMLElement): unknown[] {
   return root
     .querySelectorAll('script[type="application/ld+json"]')
-    .map((el) => normalizeSanctionedFields(JSON.parse(el.textContent)));
+    .map((el) => JSON.parse(el.textContent));
 }
+
+// Recursively collects every string value found under the given key,
+// anywhere in the structured-data tree (arrays and nested objects included).
+function collectFieldValues(value: unknown, key: string, out: string[] = []): string[] {
+  if (Array.isArray(value)) {
+    for (const item of value) collectFieldValues(item, key, out);
+  } else if (value && typeof value === "object") {
+    for (const [k, v] of Object.entries(value)) {
+      if (k === key && typeof v === "string") out.push(v);
+      else collectFieldValues(v, key, out);
+    }
+  }
+  return out;
+}
+
+const SANITY_CDN_IMAGE = /^https:\/\/cdn\.sanity\.io\/.+/;
 
 type CheckResult = { label: string; pass: boolean; detail?: string };
 
@@ -210,15 +250,47 @@ function verifySlug(slug: string): CheckResult[] {
 
   // (C) Structured data
   try {
-    const currentLd = structuredData(currentRoot);
-    const baselineLd = structuredData(baselineRoot);
+    const currentLdRaw = parseStructuredData(currentRoot);
+    const baselineLdRaw = parseStructuredData(baselineRoot);
+
+    // C: every field except `image`/`headline` (see docstring), byte-for-byte.
+    const currentLd = currentLdRaw.map(normalizeSanctionedFields);
+    const baselineLd = baselineLdRaw.map(normalizeSanctionedFields);
     const cPass = JSON.stringify(currentLd) === JSON.stringify(baselineLd);
     checks.push({
-      label: "C: structured data identical",
+      label: "C: structured data identical (excl. sanctioned image/headline)",
       pass: cPass,
       detail: cPass
         ? undefined
         : `current:\n${JSON.stringify(currentLd, null, 2)}\nbaseline:\n${JSON.stringify(baselineLd, null, 2)}`,
+    });
+
+    // C2: `headline` must agree with this page's own <h1> — the real
+    // invariant post-cutover. Fails on missing, empty, or wrong/swapped
+    // headlines; does not fail on drift from the (sanctioned-to-differ)
+    // baseline headline.
+    const h1 = currentRoot.querySelector("h1");
+    const h1Text = h1 ? collapseWhitespace(h1.textContent) : null;
+    const headlines = collectFieldValues(currentLdRaw, "headline");
+    const headlinePass =
+      h1Text !== null && headlines.length > 0 && headlines.every((h) => h === h1Text);
+    checks.push({
+      label: "C2: BlogPosting headline matches this page's <h1>",
+      pass: headlinePass,
+      detail: headlinePass
+        ? undefined
+        : `<h1>: ${JSON.stringify(h1Text)}\nheadline(s) in structured data: ${JSON.stringify(headlines)}`,
+    });
+
+    // C3: `image` must be a non-empty, absolute Sanity CDN URL. Fails on
+    // missing, empty, relative, or wrong-host values; does not fail on the
+    // (sanctioned) move away from the baseline's local /assets path.
+    const images = collectFieldValues(currentLdRaw, "image");
+    const imagePass = images.length > 0 && images.every((img) => SANITY_CDN_IMAGE.test(img));
+    checks.push({
+      label: "C3: BlogPosting image is a non-empty Sanity CDN URL",
+      pass: imagePass,
+      detail: imagePass ? undefined : `image(s) in structured data: ${JSON.stringify(images)}`,
     });
   } catch (err) {
     checks.push({

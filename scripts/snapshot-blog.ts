@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { BLOG_POSTS } from "../app/blog/posts";
+import { BLOG_POSTS } from "../app/(site)/blog/posts";
 
 const BUILD_DIR = ".next/server/app/blog";
 const OUT_DIR = "test/fixtures/blog-baseline";

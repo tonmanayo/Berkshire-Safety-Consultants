@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
-import { FAQS } from "@/app/faq/faqs";
+import { FAQS } from "@/app/(site)/faq/faqs";
 
 export function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number>(-1);

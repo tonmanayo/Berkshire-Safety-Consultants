@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { FAQS, faqPageLd } from "@/app/faq/faqs";
-import { BLOG_POSTS, blogPostingLd, blogCollectionLd, SITE_URL } from "@/app/blog/posts";
+import { FAQS, faqPageLd } from "@/app/(site)/faq/faqs";
+import { BLOG_POSTS, blogPostingLd, blogCollectionLd, SITE_URL } from "@/app/(site)/blog/posts";
 
 describe("faqPageLd", () => {
   it("produces a FAQPage with one Question per FAQ entry", () => {

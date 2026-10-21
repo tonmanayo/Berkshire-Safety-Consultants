@@ -12,6 +12,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "snapshot:blog": "tsx scripts/snapshot-blog.ts",
+    "verify:baseline": "tsx scripts/verify-baseline.ts",
     "prepare": "husky"
   },
   "dependencies": {

@@ -39,15 +39,28 @@ const fixture = [
 ];
 
 describe("blogPostingLd", () => {
-  it("builds a BlogPosting with an absolute URL, date-only datePublished, and image", () => {
+  it("builds the complete BlogPosting object, field for field", () => {
     const ld = blogPostingLd(fixture[0]);
-    expect(ld["@type"]).toBe("BlogPosting");
-    expect(ld.headline).toBe("Toolbox talks");
-    expect(ld.mainEntityOfPage).toBe(`${SITE_URL}/blog/toolbox-talks`);
-    // publishedAt is a full ISO datetime; the LD date is date-only, matching
-    // what the original hand-written articles emitted.
-    expect(ld.datePublished).toBe("2025-05-29");
-    expect(ld.image).toContain("cdn.sanity.io");
+    // Full object equality, not spot checks: a dropped @id, inLanguage,
+    // author, publisher or isPartOf must fail this test, since neither
+    // verify:baseline (no fixture for arbitrary new posts) nor a partial
+    // assertion here would otherwise catch it.
+    expect(ld).toEqual({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": `${SITE_URL}/blog/toolbox-talks#article`,
+      mainEntityOfPage: `${SITE_URL}/blog/toolbox-talks`,
+      headline: "Toolbox talks",
+      description: "Short, informal talks that build safety culture.",
+      image: "https://cdn.sanity.io/images/eyos1dte/production/abc-1200x800.png",
+      // publishedAt is a full ISO datetime; the LD date is date-only,
+      // matching what the original hand-written articles emitted.
+      datePublished: "2025-05-29",
+      inLanguage: "en-GB",
+      author: { "@id": `${SITE_URL}/#org` },
+      publisher: { "@id": `${SITE_URL}/#org` },
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+    });
   });
 
   it("always uses the excerpt, ignoring any seoDescription (that override is for page <meta> only)", () => {
@@ -57,10 +70,38 @@ describe("blogPostingLd", () => {
 });
 
 describe("blogCollectionLd", () => {
-  it("lists every post", () => {
+  it("builds the complete Blog collection, field for field, for every post", () => {
     const ld = blogCollectionLd(fixture);
-    expect(ld["@type"]).toBe("Blog");
-    expect(ld.blogPost).toHaveLength(2);
-    expect(ld.blogPost[0].url).toBe(`${SITE_URL}/blog/toolbox-talks`);
+    // Full object equality, including every field of every blogPost[] entry
+    // — a dropped @id, image or datePublished on any entry must fail this.
+    expect(ld).toEqual({
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "@id": `${SITE_URL}/blog#blog`,
+      name: "Berkshire Safety Consultants — Blog",
+      url: `${SITE_URL}/blog`,
+      inLanguage: "en-GB",
+      publisher: { "@id": `${SITE_URL}/#org` },
+      blogPost: [
+        {
+          "@type": "BlogPosting",
+          "@id": `${SITE_URL}/blog/toolbox-talks#article`,
+          headline: "Toolbox talks",
+          description: "Short, informal talks that build safety culture.",
+          url: `${SITE_URL}/blog/toolbox-talks`,
+          image: "https://cdn.sanity.io/images/eyos1dte/production/abc-1200x800.png",
+          datePublished: "2025-05-29",
+        },
+        {
+          "@type": "BlogPosting",
+          "@id": `${SITE_URL}/blog/fire-safety-101#article`,
+          headline: "Fire safety 101 for homes",
+          description: "Simple steps that protect your family.",
+          url: `${SITE_URL}/blog/fire-safety-101`,
+          image: "https://cdn.sanity.io/images/eyos1dte/production/def-1200x800.png",
+          datePublished: "2024-07-24",
+        },
+      ],
+    });
   });
 });

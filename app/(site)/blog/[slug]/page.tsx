@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
-import { getPost, getPostSlugs } from "@/lib/sanity/queries";
+import { getPost, getPostSlugsOrThrow } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 import { BlogPostArticle } from "@/components/BlogPostArticle";
 import { blogPostingLd } from "@/lib/blog/schema";
 
 export async function generateStaticParams() {
-  return (await getPostSlugs()).map((slug) => ({ slug }));
+  // Throws in a configured build if Sanity returns zero posts, rather than
+  // silently shipping a blog with no articles — see getPostSlugsOrThrow.
+  return (await getPostSlugsOrThrow()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

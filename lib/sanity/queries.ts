@@ -54,6 +54,32 @@ export async function getPostSlugs(): Promise<string[]> {
   }
 }
 
+/**
+ * Like getPostSlugs(), but asymmetric about what an empty result means —
+ * for use at build time (generateStaticParams, the sitemap), where silently
+ * shipping zero posts is a regression, not a valid state:
+ *
+ *   - Unconfigured build (`client` is null, e.g. CI running without
+ *     Sanity secrets): degrade to [] quietly, same as getPostSlugs(). A
+ *     blog with no articles is the correct, expected output here.
+ *   - Configured build (`client` is set) returning zero slugs — whether
+ *     from a genuine outage, misconfiguration, or an emptied dataset:
+ *     throw. Otherwise this would silently 404 every live article URL and
+ *     drop them all from the sitemap, with a green, unremarkable build. A
+ *     failed deploy is recoverable in minutes; a silently empty blog is
+ *     not, so refuse to build rather than ship it.
+ */
+export async function getPostSlugsOrThrow(): Promise<string[]> {
+  const slugs = await getPostSlugs();
+  if (client && slugs.length === 0) {
+    throw new Error(
+      "no posts returned from Sanity; refusing to build a blog with zero articles " +
+        "(set NEXT_PUBLIC_SANITY_PROJECT_ID empty to build without the CMS)",
+    );
+  }
+  return slugs;
+}
+
 export async function getPost(slug: string): Promise<PostDoc | null> {
   if (!client) return null;
   try {

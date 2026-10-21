@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getPostSlugs } from "@/lib/sanity/queries";
+import { getPostSlugsOrThrow } from "@/lib/sanity/queries";
 
 const BASE_URL = "https://www.berkshiresafetyconsultants.com";
 
@@ -37,7 +37,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority,
   }));
 
-  const slugs = await getPostSlugs();
+  // Throws in a configured build if Sanity returns zero posts, rather than
+  // silently dropping all blog URLs from the sitemap — see getPostSlugsOrThrow.
+  const slugs = await getPostSlugsOrThrow();
   const blogEntries = slugs.map((slug) => ({
     url: `${BASE_URL}/blog/${slug}`,
     lastModified,

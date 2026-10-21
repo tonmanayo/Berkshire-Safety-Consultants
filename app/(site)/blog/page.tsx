@@ -101,6 +101,10 @@ export default async function BlogPage() {
       {/* FEATURED */}
       <section style={{ background: "var(--white)", color: "var(--ink)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "72px 24px 0" }}>
+          {/* By design: if no post is marked featured, this section renders
+              nothing. The old hand-written page always had a hardcoded
+              featured article; that guarantee no longer holds now that it's
+              editorial (the `featured` flag on a Sanity post). */}
           {featured ? (
             <Link
               href={`/blog/${featured.slug}`}

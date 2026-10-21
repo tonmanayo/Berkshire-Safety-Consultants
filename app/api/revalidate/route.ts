@@ -4,6 +4,12 @@ import { parseBody } from "next-sanity/webhook";
 
 export async function POST(req: NextRequest) {
   try {
+    if (!process.env.SANITY_REVALIDATE_SECRET) {
+      console.error(
+        "[revalidate] SANITY_REVALIDATE_SECRET is not set; every webhook request will be rejected. Set it in the Netlify environment and in the Sanity webhook's Secret field.",
+      );
+    }
+
     const { isValidSignature, body } = await parseBody<{ _type: string }>(
       req,
       process.env.SANITY_REVALIDATE_SECRET,

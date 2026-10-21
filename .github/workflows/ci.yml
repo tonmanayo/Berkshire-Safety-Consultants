@@ -8,6 +8,16 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    # Public Sanity config only (see .env.example: "public values — safe to
+    # commit") — needed so `npm run build` fetches real posts and emits
+    # per-slug blog HTML; without it the client is unconfigured, the build
+    # degrades to zero posts, and both the fidelity tests and
+    # verify:baseline below would fail with "missing built preview" for
+    # every slug instead of actually checking anything.
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: eyos1dte
+      NEXT_PUBLIC_SANITY_DATASET: production
+      NEXT_PUBLIC_SANITY_API_VERSION: 2024-10-01
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,5 +28,13 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check
-      - run: npm test
+      # Build before test: test/fidelity.test.ts reads rendered HTML from
+      # .next/server/app/blog/, so running it before a build fails almost
+      # every assertion rather than testing anything real.
       - run: npm run build
+      - run: npm test
+      # The strongest gate in this migration (byte-level body, full
+      # <meta>/<link>/<title> set, and JSON-LD deep-equal against the
+      # frozen baselines) — previously only run when someone remembered to
+      # type it locally.
+      - run: npm run verify:baseline

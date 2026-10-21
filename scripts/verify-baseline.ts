@@ -23,7 +23,16 @@
  *       the baseline's set. Both sides have any `/opengraph-image-<hash>`
  *       route-group suffix normalized back to `/opengraph-image` first,
  *       since that path change is a sanctioned, deliberate delta (see
- *       task-4 report, round 3).
+ *       task-4 report, round 3). The <head>'s `<title>` is also included
+ *       in this set (it isn't a <meta> or <link>, so it would otherwise go
+ *       unchecked by any gate). Two specific live title changes —
+ *       iso-9001-vs-iso-45001 (em dash to full stop) and why-dusty-sites
+ *       (straight to curly quotes) — are reviewed, sanctioned deltas from
+ *       the <title> now following each article's own <h1>; both sides are
+ *       normalized through SANCTIONED_TITLE_CHANGES to the baseline string
+ *       before comparing, narrowly, by exact string, so only those two
+ *       already-reviewed changes pass and any other title change still
+ *       fails.
  *   (C) Structured data — every `<script type="application/ld+json">` block,
  *       JSON.parsed, deep-compared to the baseline's, EXCEPT for two fields
  *       inside BlogPosting objects — `image` and `headline` — which are
@@ -116,13 +125,46 @@ function isBundlerChunkLink(el: HTMLElement): boolean {
   return Object.values(el.attributes).some((value) => value.includes("/_next/static/chunks/"));
 }
 
+// Two, and only two, live <title> changes are sanctioned (reviewed and
+// accepted — see module docstring below): the <title> now derives from each
+// article's own <h1> instead of a second, independently hand-maintained
+// string, which is the right direction. Keyed by the pre-cutover baseline
+// title, mapped to the exact post-cutover title it's allowed to replace.
+// Both sides are normalized through this table to the baseline string
+// before comparing, so these two specific, already-reviewed changes pass
+// while a title changing for any OTHER reason — on these two slugs or any
+// other — still fails the gate.
+const SANCTIONED_TITLE_CHANGES: Record<string, string> = {
+  "ISO 9001 vs ISO 45001 — which does my business actually need? · Berkshire Safety Consultants":
+    "ISO 9001 vs ISO 45001. Which does my business actually need? · Berkshire Safety Consultants",
+  'Why "dusty" sites are a commercial liability · Berkshire Safety Consultants':
+    "Why “dusty” sites are a commercial liability · Berkshire Safety Consultants",
+};
+
+const SANCTIONED_TITLE_NEW_TO_OLD: Record<string, string> = Object.fromEntries(
+  Object.entries(SANCTIONED_TITLE_CHANGES).map(([oldTitle, newTitle]) => [newTitle, oldTitle]),
+);
+
+function normalizeSanctionedTitle(text: string): string {
+  return SANCTIONED_TITLE_NEW_TO_OLD[text] ?? text;
+}
+
 function headMetaAndLinkTags(root: HTMLElement): string[] {
   const head = root.querySelector("head");
   if (!head) return [];
-  return head
+  const metaAndLink = head
     .querySelectorAll("meta, link")
     .filter((el) => !isBundlerChunkLink(el))
     .map((el) => normalizeOpengraphSuffix(canonicalTag(el)));
+
+  // <title> isn't a <meta> or <link>, so it was previously unchecked by this
+  // gate entirely — include it as its own canonical-tag-shaped entry.
+  const titleEl = head.querySelector("title");
+  const titleTags = titleEl
+    ? [`<title>${normalizeSanctionedTitle(collapseWhitespace(titleEl.textContent))}</title>`]
+    : [];
+
+  return [...metaAndLink, ...titleTags];
 }
 
 // `image` and `headline` are excluded from the (C) deep-equal below because

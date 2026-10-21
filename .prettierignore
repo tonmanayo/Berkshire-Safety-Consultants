@@ -3,3 +3,8 @@ node_modules
 public/ds
 public/assets
 package-lock.json
+
+# Frozen build artefacts that every fidelity/verify-baseline gate diffs
+# against byte-for-byte. Never reformat these — doing so would move the
+# goalposts the gates compare to, invisibly.
+test/fixtures/blog-baseline

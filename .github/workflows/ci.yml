@@ -8,9 +8,16 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    # Public Sanity config only (see .env.example: "public values — safe to
+    # commit") — needed so `npm run build` fetches real posts; without
+    # it the client is unconfigured and the build degrades to zero posts.
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: eyos1dte
+      NEXT_PUBLIC_SANITY_DATASET: production
+      NEXT_PUBLIC_SANITY_API_VERSION: 2024-10-01
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -18,5 +25,9 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check
-      - run: npm test
       - run: npm run build
+      # Not run here, deliberately: `npm run verify:baseline` and
+      # `npm run test:fidelity` compare live CMS content to HTML frozen before
+      # the migration. Content is now editable in the Studio, so they would go
+      # red on any legitimate edit. They remain available on demand.
+      - run: npm test

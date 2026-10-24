@@ -1,0 +1,13 @@
+# Append a DCO Signed-off-by line if the message doesn't already carry one.
+#
+# The DCO GitHub App requires every commit to be signed off, and git has no
+# built-in "always sign off" setting (format.signOff only affects
+# format-patch, not commit). Doing it here means it cannot be forgotten,
+# and it stays correct if the committer identity changes.
+#
+# $1 = path to the commit message file
+grep -qi '^Signed-off-by:' "$1" || {
+  NAME=$(git config user.name)
+  EMAIL=$(git config user.email)
+  printf '\nSigned-off-by: %s <%s>\n' "$NAME" "$EMAIL" >> "$1"
+}

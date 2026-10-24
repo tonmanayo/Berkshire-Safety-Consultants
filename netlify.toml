@@ -2,5 +2,33 @@
   command = "npm run build"
   publish = ".next"
 
+# Public Sanity config. These are not secrets: NEXT_PUBLIC_* values are inlined
+# into the client bundle and the project id is visible in every Sanity image
+# URL. They live here so a new deploy context or a cleared UI variable cannot
+# silently build a site with zero posts. The secret SANITY_REVALIDATE_SECRET
+# deliberately stays in the Netlify UI only — never put it in this file.
+[build.environment]
+  NEXT_PUBLIC_SANITY_PROJECT_ID = "eyos1dte"
+  NEXT_PUBLIC_SANITY_DATASET = "production"
+  NEXT_PUBLIC_SANITY_API_VERSION = "2024-10-01"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Security headers applied to every response.
+#
+# Deliberately NOT including a Content-Security-Policy: this site loads GA4,
+# Sanity's CDN and an embedded Studio, so a CSP needs to be built up against
+# real traffic (report-only first) rather than guessed. A wrong CSP breaks
+# pages silently for visitors, which is worse than not having one yet.
+#
+# X-Frame-Options is SAMEORIGIN rather than DENY: Sanity's Presentation tool
+# iframes the site from /studio, which is the same origin here. DENY would
+# block that while buying nothing extra against third-party clickjacking.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"

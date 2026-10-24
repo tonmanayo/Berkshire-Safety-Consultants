@@ -44,7 +44,7 @@ Site-wide `@graph` injected in `app/layout.tsx`:
 Data centralised as single sources of truth and reused for both the UI and the schema:
 
 - **`FAQPage`** on **/faq** — 10 Q&As. FAQ data lives in `app/faq/faqs.ts` (shared by the accordion UI and the schema).
-- **`BlogPosting`** on **all 10 blog articles**, each with headline, description, image (absolute URL), `datePublished` (ISO), author + publisher (the org). Post data lives in `app/blog/posts.ts`.
+- **`BlogPosting`** on **all 10 blog articles**, each with headline, description, image (absolute URL), `datePublished` (ISO), author + publisher (the org). Post data is editorial content in Sanity (the embedded Studio at `/studio`), fetched via `lib/sanity/queries.ts`.
 - **`Blog`** collection on the **/blog** index, listing all posts.
 
 Blog articles + inferred publish dates (normalised to ISO from the on-page dates):
@@ -64,12 +64,12 @@ Blog articles + inferred publish dates (normalised to ISO from the on-page dates
 
 ## 7. Performance / Core Web Vitals
 
-Every image converted from raw `<img>` to **`next/image`** (auto WebP/AVIF, responsive `srcset`, lazy-load below the fold, no layout shift). `~29 images` across 6 templates:
+Every image converted from raw `<img>` to **`next/image`** (auto WebP/AVIF, responsive `srcset`, lazy-load below the fold, no layout shift). `~37 images` across 6 templates:
 
 - `app/page.tsx` (15 — cover photos, ISO badges, partner logos, 1 SVG served `unoptimized`)
 - `app/about/page.tsx` (6 — story + team photos)
 - `app/services/page.tsx` (4)
-- `app/blog/page.tsx` (2 — featured + grid cards)
+- `app/(site)/blog/page.tsx` (10 — 1 featured + 9 grid cards, served from Sanity's CDN)
 - `app/principal-designer-services/page.tsx` (1)
 - `app/first-aid-fire-marshal-training/page.tsx` (1 — partner logo)
 

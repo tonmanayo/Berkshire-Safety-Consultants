@@ -9,11 +9,8 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     # Public Sanity config only (see .env.example: "public values — safe to
-    # commit") — needed so `npm run build` fetches real posts and emits
-    # per-slug blog HTML; without it the client is unconfigured, the build
-    # degrades to zero posts, and both the fidelity tests and
-    # verify:baseline below would fail with "missing built preview" for
-    # every slug instead of actually checking anything.
+    # commit") — needed so `npm run build` fetches real posts; without
+    # it the client is unconfigured and the build degrades to zero posts.
     env:
       NEXT_PUBLIC_SANITY_PROJECT_ID: eyos1dte
       NEXT_PUBLIC_SANITY_DATASET: production
@@ -28,13 +25,9 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check
-      # Build before test: test/fidelity.test.ts reads rendered HTML from
-      # .next/server/app/blog/, so running it before a build fails almost
-      # every assertion rather than testing anything real.
       - run: npm run build
+      # Not run here, deliberately: `npm run verify:baseline` and
+      # `npm run test:fidelity` compare live CMS content to HTML frozen before
+      # the migration. Content is now editable in the Studio, so they would go
+      # red on any legitimate edit. They remain available on demand.
       - run: npm test
-      # The strongest gate in this migration (byte-level body, full
-      # <meta>/<link>/<title> set, and JSON-LD deep-equal against the
-      # frozen baselines) — previously only run when someone remembered to
-      # type it locally.
-      - run: npm run verify:baseline

@@ -1,6 +1,13 @@
 /**
  * The fidelity gate.
  *
+ * OPT-IN, NOT PART OF THE DEFAULT RUN. Skipped unless RUN_FIDELITY=1 (use
+ * `npm run test:fidelity`, after `npm run build`). This verifies a one-time
+ * migration against HTML frozen before the migration, but the content it
+ * compares is now live and editable in the Sanity Studio: any typo fix or
+ * reworded sentence would fail it, turning CI red with no code at fault. It
+ * is kept as the record of the migration and for on-demand re-checks.
+ *
  * This was the go/no-go for deleting the original, hand-coded /blog/[slug]
  * pages (Task 12). It compares each migrated article, as rendered by the
  * Sanity-backed /blog/[slug] template (now the real route, post-cutover),
@@ -147,7 +154,7 @@ function readBaseline(slug: string): string {
   return readFileSync(join(BASELINE_DIR, `${slug}.html`), "utf8");
 }
 
-describe("migrated posts match their baseline", () => {
+describe.skipIf(!process.env.RUN_FIDELITY)("migrated posts match their baseline", () => {
   it("has a baseline for all 10 posts", () => {
     expect(slugs).toHaveLength(10);
   });

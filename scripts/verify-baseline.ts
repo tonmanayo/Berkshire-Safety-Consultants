@@ -1,6 +1,12 @@
 /**
  * verify-baseline.ts
  *
+ * ON-DEMAND ONLY — deliberately not run in CI. This verifies a one-time
+ * migration against output frozen before the migration, but the content it
+ * compares is now live and editable in the Sanity Studio: any legitimate edit
+ * (typo fix, reworded sentence) makes it fail. Run it manually with
+ * `npm run verify:baseline` after `npm run build`. Kept as the migration record.
+ *
  * Compares the current build's blog pages against the frozen baselines in
  * test/fixtures/blog-baseline/, using a content-level contract rather than
  * whole-file byte identity. Whole-file identity is the wrong bar whenever a

@@ -76,9 +76,24 @@ const slugs = readdirSync(BASELINE_DIR)
   .map((f) => f.replace(/\.html$/, ""))
   .sort();
 
-/** Strip React's hydration comment markers (`<!-- -->`, `<!--$-->`, etc). */
+/**
+ * Strip React's hydration comment markers (`<!-- -->`, `<!--$-->`, etc).
+ *
+ * Loops until the string stops changing rather than replacing once: a single
+ * pass over something like `<!--<!---->` removes the inner comment and leaves
+ * a dangling `<!--` behind. That is CodeQL's js/incomplete-multi-character-
+ * sanitization, and while the inputs here are our own build output and
+ * committed fixtures — never user input, never rendered — a comparison helper
+ * that can leave residue is worth making total rather than arguing about.
+ */
 function stripComments(s: string): string {
-  return s.replace(/<!--[\s\S]*?-->/g, "");
+  let out = s;
+  let previous: string;
+  do {
+    previous = out;
+    out = out.replace(/<!--[\s\S]*?-->/g, "");
+  } while (out !== previous);
+  return out;
 }
 
 /**

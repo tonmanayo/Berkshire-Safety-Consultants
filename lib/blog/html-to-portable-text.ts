@@ -26,7 +26,8 @@ const INLINE_TAGS = new Set(["strong", "em", "b", "i", "br"]);
 // unmapped and throws (see decode) rather than leaking literal "&foo;" text
 // into Sanity.
 const NAMED_ENTITIES: Record<string, string> = {
-  apos: "’",
+  // U+0027 per the HTML spec (not a curly quote).
+  apos: "'",
   rsquo: "’",
   lsquo: "‘",
   ldquo: "“",

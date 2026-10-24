@@ -2,6 +2,11 @@ import { describe, it, expect } from "vitest";
 import { htmlToPortableText } from "../html-to-portable-text";
 
 describe("htmlToPortableText", () => {
+  it("decodes &apos; to U+0027 APOSTROPHE, not a curly quote", () => {
+    const blocks = htmlToPortableText("<p>it&apos;s</p>");
+    expect(blocks[0].children[0].text).toBe("it\u0027s");
+  });
+
   it("converts paragraphs and headings", () => {
     const blocks = htmlToPortableText("<p>Hello there</p><h2>Why it matters</h2>");
     expect(blocks).toHaveLength(2);
@@ -27,7 +32,7 @@ describe("htmlToPortableText", () => {
 
   it("decodes HTML entities", () => {
     const blocks = htmlToPortableText("<p>it&apos;s &ldquo;quoted&rdquo; &amp; fine</p>");
-    expect(blocks[0].children[0].text).toBe("it’s “quoted” & fine");
+    expect(blocks[0].children[0].text).toBe("it\u0027s “quoted” & fine");
   });
 
   it("collapses whitespace introduced by source formatting", () => {

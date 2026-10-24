@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Newspaper } from "lucide-react";
 import { Tag } from "@/components/ds/Tag";
-import { getPosts } from "@/lib/sanity/queries";
+import { getPostsOrThrow } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 import { formatPostDate, readTimeFromText } from "@/lib/blog/format";
 import { blogCollectionLd } from "@/lib/blog/schema";
@@ -15,7 +15,7 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await getPosts();
+  const posts = await getPostsOrThrow();
   const featured = posts.find((p) => p.featured);
   const rest = posts.filter((p) => p !== featured);
   const ld = posts.map((p) => ({ ...p, image: urlForImage(p.heroImage) }));

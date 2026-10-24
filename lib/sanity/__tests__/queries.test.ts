@@ -20,6 +20,11 @@ describe("queries with no Sanity env", () => {
     const { getPostSlugsOrThrow } = await import("../queries");
     expect(await getPostSlugsOrThrow()).toEqual([]);
   });
+
+  it("getPostsOrThrow degrades to empty when unconfigured", async () => {
+    const { getPostsOrThrow } = await import("../queries");
+    expect(await getPostsOrThrow()).toEqual([]);
+  });
 });
 
 describe("queries with network error", () => {
@@ -46,15 +51,19 @@ describe("queries with network error", () => {
     expect(result).toEqual([]);
   });
 
-  it("getPost catches fetch error and returns null", async () => {
+  it("getPost re-throws a fetch error rather than returning null — null becomes a cached 404", async () => {
     const { getPost } = await import("../queries");
-    const result = await getPost("any-slug");
-    expect(result).toBeNull();
+    await expect(getPost("any-slug")).rejects.toThrow(/network down/);
+  });
+
+  it("getPostsOrThrow throws and names the underlying cause", async () => {
+    const { getPostsOrThrow } = await import("../queries");
+    await expect(getPostsOrThrow()).rejects.toThrow(/network down/);
   });
 
   it("getPostSlugsOrThrow throws instead of silently returning empty — a configured build hitting Sanity errors must fail loudly, not ship a zero-article blog", async () => {
     const { getPostSlugsOrThrow } = await import("../queries");
-    await expect(getPostSlugsOrThrow()).rejects.toThrow(/refusing to build a blog with zero/);
+    await expect(getPostSlugsOrThrow()).rejects.toThrow(/network down/);
   });
 });
 
@@ -73,6 +82,11 @@ describe("queries with a configured client returning zero posts (not an error, j
   it("getPostSlugs still returns empty (no error to catch)", async () => {
     const { getPostSlugs } = await import("../queries");
     expect(await getPostSlugs()).toEqual([]);
+  });
+
+  it("getPostsOrThrow throws on an empty list for a configured build", async () => {
+    const { getPostsOrThrow } = await import("../queries");
+    await expect(getPostsOrThrow()).rejects.toThrow(/refusing to build a blog with zero/);
   });
 
   it("getPostSlugsOrThrow throws even though nothing errored, because the build is configured", async () => {

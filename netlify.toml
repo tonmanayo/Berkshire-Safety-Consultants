@@ -4,3 +4,21 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Security headers applied to every response.
+#
+# Deliberately NOT including a Content-Security-Policy: this site loads GA4,
+# Sanity's CDN and an embedded Studio, so a CSP needs to be built up against
+# real traffic (report-only first) rather than guessed. A wrong CSP breaks
+# pages silently for visitors, which is worse than not having one yet.
+#
+# X-Frame-Options is SAMEORIGIN rather than DENY: Sanity's Presentation tool
+# iframes the site from /studio, which is the same origin here. DENY would
+# block that while buying nothing extra against third-party clickjacking.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
